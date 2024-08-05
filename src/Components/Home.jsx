@@ -7,9 +7,9 @@ function Home() {
   const [articles, setArticles] = useState([])
 
   useEffect(() => {
-    getArticles().then((articles) => {
-    console.log(articles)
-      setArticles(articles)
+    getArticles()
+    .then((articles) => {
+        setArticles(articles)
     });
   }, []);
 
@@ -17,7 +17,7 @@ function Home() {
     <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => {
             return (
-                <Link to = {`/${article.article_id}`} >
+                <Link key = {article.article_id} to = {`/${article.article_id}`} >
                     <div className="card card-compact bg-base-100 w-96 shadow-xl">
                     <figure>
                         <img
