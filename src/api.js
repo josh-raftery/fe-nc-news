@@ -22,9 +22,12 @@ function getArticle(article_id){
 function getComments(article_id){
     return api.get(`/articles/${article_id}/comments`)
     .then(({data}) => {
-        console.log(data)
         return data.comments
     })
 }
 
-export {getArticles,getArticle,getComments}
+function incArticleVotes(article_id,inc_votes){
+    return api.patch(`/articles/${article_id}`,{inc_votes})
+}
+
+export {getArticles,getArticle,getComments,incArticleVotes}

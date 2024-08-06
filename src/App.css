@@ -14,3 +14,18 @@
     top: 0;
     left: 0;
 }
+
+.votes-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn{
+    margin-right: 1rem;
+}
+
+.badge{
+    margin-right: 1rem;
+    margin-top: 1rem;
+}

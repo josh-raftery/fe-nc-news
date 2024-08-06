@@ -15,7 +15,6 @@ function Comments({ article_id }) {
       setLoading(false)
     })
     .catch((err) => {
-        console.log(err)
         setLoading(false)
     })
   }, []);
@@ -30,7 +29,7 @@ function Comments({ article_id }) {
     <>
         {comments.map((currentComment) => {
             return (
-                <div className="card bg-base-100  shadow-xl">
+                <div key={currentComment.comment_id} className="card bg-base-100  shadow-xl">
                 <div className="card-body">
                     <p>{currentComment.body}</p>
                     <div className="card-actions justify-end">
