@@ -15,10 +15,11 @@
     left: 0;
 }
 
+.post-comment,
 .votes-btn{
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 .btn{
@@ -29,3 +30,4 @@
     margin-right: 1rem;
     margin-top: 1rem;
 }
+

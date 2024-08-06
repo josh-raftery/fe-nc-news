@@ -30,4 +30,11 @@ function incArticleVotes(article_id,inc_votes){
     return api.patch(`/articles/${article_id}`,{inc_votes})
 }
 
-export {getArticles,getArticle,getComments,incArticleVotes}
+function postComment(article_id,username,comment){
+    return api.post(`/articles/${article_id}/comments`,{
+        body: comment,
+        author: username
+    })
+}
+
+export {getArticles,getArticle,getComments,incArticleVotes,postComment}
