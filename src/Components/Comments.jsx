@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getComments, postComment } from "../api";
+import { deleteComment, getComments, postComment } from "../api";
 import Loading from "./Loading";
 import { UserContext } from "../contexts/User";
 
@@ -8,9 +8,11 @@ function Comments({ article_id }) {
   const [badComment,setBadComment] = useState(false)
   const [badPost, setBadPost] = useState(false)
   const [comment, setComment] = useState("");
-  const [success, setSuccess] = useState(true)
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true)
+  const [didDeleteFail, setDidDeleteFail] = useState(true)
+  const [deleteFailComment, setDeleteFailComment] = useState(0)
+  const [deleteFailPosition, setDeleteFailPosition] = useState(0)
   const { user } = useContext(UserContext)
   const [userData] = user
 
@@ -18,24 +20,48 @@ function Comments({ article_id }) {
     setComment(event.target.value)
   }
 
-  console.log(comments)
-
-  function handleSumbit(event){
+  function handleSubmit(event){
     event.preventDefault()
     if(!comment){
       setBadComment(true)
     } else{
       setBadComment(false)
       return postComment(article_id,userData.username,comment)
-      .then(() => {
+      .then((newComment) => {
+        setComments((currComments) => [newComment, ...currComments])
         setBadPost(false)
         setComment("")
-        setSuccess(true) //trigger useEffect - feedback appreicated
       })
       .catch((err) => {
         setBadPost(true)
       })
     }
+  }
+
+  function handleDeleteComment(deletedComment,index){
+    const {comment_id} = deletedComment
+    setComments((currComment) => {
+      return currComment.filter((element) => {
+        if(element.comment_id != comment_id){
+          return element
+        }
+      })
+    })
+    deleteComment(comment_id)
+    .then(() => {
+      setDidDeleteFail(false)
+      setDeleteFailComment(0)
+      setDeleteFailPosition(0)
+    })
+    .catch(() => {
+      setComments((currComments) => {
+        currComments.splice(index,0,deletedComment)
+        return currComments
+      })
+      setDidDeleteFail(true)
+      setDeleteFailComment(comment_id)
+      setDeleteFailPosition(index)
+    })
   }
 
   useEffect(() => {
@@ -47,7 +73,7 @@ function Comments({ article_id }) {
     .catch((err) => {
         setLoading(false)
     })
-  }, [success]);
+  }, []);
 
   if(loading){
     return (
@@ -58,7 +84,7 @@ function Comments({ article_id }) {
   return (
     <>
       <div className="post-comment">
-      <label class="form-control w-full max-w-xs">
+      <label className="form-control w-full max-w-xs">
           <input
             value={comment}
             type="text"
@@ -70,21 +96,30 @@ function Comments({ article_id }) {
             <span className="label-text-alt">{badPost ? "Poor connection, try again later" : ""}</span>
           </div>
         </label>
-        <button onClick={handleSumbit} style={{marginLeft: "1rem"}} className={badPost || badComment ? "input input-bordered input-error" : "btn btn-outline btn-primary"}>Post</button>
+        <button onClick={handleSubmit} style={{marginLeft: "1rem"}} className={badPost || badComment ? "input input-bordered input-error" : "btn btn-outline btn-primary"}>Post</button>
       </div>
-        {comments.map((currentComment) => {
+        {comments.map((currentComment,index) => {
             return (
-                <div key={currentComment.comment_id} className="card bg-base-100  shadow-xl">
+                <div 
+                key={currentComment.comment_id} 
+                className="card bg-base-100 shadow-xl"
+                style={deleteFailComment === currentComment.comment_id ? {border: "solid red"} : {}}
+                >
                 <div className="card-body">
                     <p>{currentComment.body}</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Edit</button>
-                        <button className="btn btn-accent">X</button>
-                    </div>
+                    {currentComment.author === userData.username &&  
+                      <div className="card-actions justify-end">
+                          <button className="btn btn-primary">Edit</button>
+                          <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-accent"}>X</button>
+                          <div className="label">
+                            <span className="label-text-alt">{deleteFailComment === currentComment.comment_id ? "Poor connection, try again later" : ""}</span>
+                            </div>
+                        </div>
+                    }
                 </div>
                 </div>
             )
-        }).reverse()}
+        })}
     </>
   );
 }
