@@ -35,6 +35,13 @@ function postComment(article_id,username,comment){
         body: comment,
         author: username
     })
+    .then(({data}) => {
+        return data.comment
+    })
 }
 
-export {getArticles,getArticle,getComments,incArticleVotes,postComment}
+function deleteComment(comment_id){
+    return api.delete(`/comments/${comment_id}`)
+}
+
+export {getArticles,getArticle,getComments,incArticleVotes,postComment,deleteComment}
