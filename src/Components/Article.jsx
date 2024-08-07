@@ -11,6 +11,9 @@ function Article() {
   const [upvote, setUpvote] = useState(false)
   const [downVote, setDownvote] = useState(false)
   const [votes, setVotes] = useState(0)
+  const [hasUpVoted,setHasUpVoted] = useState(false)
+  const [hasDownVoted,setHasDownVoted] = useState(false)
+  const [parsedDate,setParsedDate] = useState("")
 
   const { article_id } = useParams();
   const { setError } = useContext(ErrorContext)
@@ -34,6 +37,8 @@ function Article() {
       setArticle(article);
       setLoading(false);
       setVotes(article.votes)
+      const date = article.created_at.split('T')
+      setParsedDate(date[0])
     })
     .catch((err) => {
       setError([{code: 404, msg: 'Not Found'}])
@@ -46,12 +51,22 @@ function Article() {
   }
 
   function handleUpvote(){
-    setUpvote(true)
     let increment = 1
+
+    if(hasUpVoted){
+      setUpvote(false)
+      setHasUpVoted(false)
+      increment = -1
+    } else{
+      setUpvote(true)
+      setHasUpVoted(true)
+    }
     
     if(downVote){
-      increment ++
+      increment = 2
       setDownvote(false)
+      setHasDownVoted(false)
+      setUpvote(true)
     }
 
     setVotes((currVotes) => {
@@ -65,15 +80,26 @@ function Article() {
         })
         setUpvote(false)
     })
+    
   }
 
   function handleDownvote(){
-    setDownvote(true)
     let increment = -1
 
+    if(hasDownVoted){
+      setDownvote(false)
+      setHasDownVoted(false)
+      increment = 1
+    } else{
+      setDownvote(true)
+      setHasDownVoted(true)
+    }
+
     if(upvote){
-      increment --
+      increment = -2
       setUpvote(false)
+      setHasUpVoted(false)
+      setDownvote(true)
     }
 
     setVotes((currVotes) => {
@@ -105,15 +131,15 @@ function Article() {
             <button onClick={handleDownvote} className={!downVote ? "btn" : "btn btn-error"} >-</button>
           </div>
           <div className="card-body w-50">
-            <p>{article.created_at}</p>
+            <p><em>{parsedDate}</em></p>
             <p>{article.topic}</p>
             <h2 className="card-title">{article.title}</h2>
             <p>{article.body}</p>
             <p>Written by: {article.author}</p>
           </div>
-          <div className="card-actions justify-end">
-            <button className = "btn btn-primary">Edit</button>
-            <button className="btn btn-accent">X</button>
+          <div style={{marginBottom: "2rem"}} className="card-actions justify-end">
+            <button className = "btn btn-outline">Edit</button>
+            <button className="btn btn-outline">X</button>
             {/* I will make these buttons appear conditionally once I have made a component for users and only allow it if user === author */}
           </div>
         </div>

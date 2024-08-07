@@ -10,9 +10,8 @@ function Comments({ article_id }) {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true)
-  const [didDeleteFail, setDidDeleteFail] = useState(true)
+  const [didDeleteFail, setDidDeleteFail] = useState(false)
   const [deleteFailComment, setDeleteFailComment] = useState(0)
-  const [deleteFailPosition, setDeleteFailPosition] = useState(0)
   const { user } = useContext(UserContext)
   const [userData] = user
 
@@ -51,7 +50,6 @@ function Comments({ article_id }) {
     .then(() => {
       setDidDeleteFail(false)
       setDeleteFailComment(0)
-      setDeleteFailPosition(0)
     })
     .catch(() => {
       setComments((currComments) => {
@@ -60,7 +58,6 @@ function Comments({ article_id }) {
       })
       setDidDeleteFail(true)
       setDeleteFailComment(comment_id)
-      setDeleteFailPosition(index)
     })
   }
 
@@ -109,8 +106,8 @@ function Comments({ article_id }) {
                     <p>{currentComment.body}</p>
                     {currentComment.author === userData.username &&  
                       <div className="card-actions justify-end">
-                          <button className="btn btn-primary">Edit</button>
-                          <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-accent"}>X</button>
+                          <button className="btn btn-outline">Edit</button>
+                          <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-outline"}>X</button>
                           <div className="label">
                             <span className="label-text-alt">{deleteFailComment === currentComment.comment_id ? "Poor connection, try again later" : ""}</span>
                             </div>
