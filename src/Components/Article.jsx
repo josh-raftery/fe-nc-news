@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getArticle, incArticleVotes } from "../api";
 import Comments from "./Comments";
 import Loading from "./Loading";
+import { ErrorContext } from "../contexts/Error";
 
 function Article() {
   const [article, setArticle] = useState({});
@@ -12,13 +13,32 @@ function Article() {
   const [votes, setVotes] = useState(0)
 
   const { article_id } = useParams();
+  const { setError } = useContext(ErrorContext)
+
+  const navigate = useNavigate()
+  
+
+  if(!Number(article_id)){
+    setError([{
+        msg: "Bad Request",
+        code: 400
+      }])
+    return (
+        <Navigate to="/error" replace/>
+    )
+  }
 
   useEffect(() => {
-    getArticle(article_id).then((article) => {
+    getArticle(article_id)
+    .then((article) => {
       setArticle(article);
       setLoading(false);
       setVotes(article.votes)
-    });
+    })
+    .catch((err) => {
+      setError([{code: 404, msg: 'Not Found'}])
+      navigate('/error')
+    })
   }, []);
 
   if (loading) {

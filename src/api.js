@@ -4,13 +4,8 @@ const api = axios.create({
   baseURL: "https://be-nc-news-ml9n.onrender.com/api",
 });
 
-function getArticles(queryString) {
-  let endpoint = "/articles"
-  endpoint += queryString
-
-  console.log(endpoint)
-  
-  return api.get(endpoint)
+function getArticles(params) {
+  return api.get('/articles',{params})
   .then(({ data }) => {
     return data.articles;
   });
@@ -20,7 +15,8 @@ function getArticle(article_id) {
   return api.get(`/articles/${article_id}`)
   .then(({ data }) => {
     return data.article;
-  });
+  })
+  
 }
 
 function getComments(article_id) {
