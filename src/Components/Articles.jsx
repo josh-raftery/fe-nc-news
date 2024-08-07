@@ -11,17 +11,38 @@ function Articles({topicInput}){
     const [sortByInput, setSortByInput] = useState("")
 
     useEffect(() => {
-        console.log(topicInput, ' topicInput')
-        getArticles(topicInput)
+        const queryArray = []
+        let queryString = ''
+        if(topicInput){
+            queryArray.push(`?topic=${topicInput}`)
+        }
+        if(orderInput){
+            queryArray.push(`?order=${orderInput}`)
+        }
+        if(sortByInput){
+            queryArray.push(`?sort_by=${sortByInput}`)
+        }
+        if(queryArray.length > 0){
+            queryString = queryArray.join('&')
+        }
+        getArticles(queryString)
         .then((articles) => {
             setArticles(articles)
         });
-    }, [topicInput]);
+    }, [topicInput,orderInput,sortByInput]);
 
     return (
         <div>
-            <SortBy setSortByInput={setSortByInput}/>
-            <Order setOrderInput={setOrderInput}/>
+            <div 
+            className="flex"
+            style={{
+                marginTop: "1rem",
+                marginBottom: "1rem"
+            }}
+            >
+                <SortBy setSortByInput={setSortByInput}/>
+                <Order setOrderInput={setOrderInput}/>
+            </div>
             <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {articles.map((article) => {
                     return (

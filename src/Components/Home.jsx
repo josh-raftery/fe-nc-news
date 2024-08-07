@@ -17,9 +17,6 @@ function Home() {
 
   return (
     <div>
-        <Link to = "topics">
-            <button class="btn btn-success">Topics</button>
-        </Link>
         <Articles setTopicInput={setTopicInput} />
     </div>
   )

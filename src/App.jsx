@@ -4,16 +4,20 @@ import Home from './Components/Home'
 import { Routes, Route } from "react-router-dom";
 import Topics from './Components/Topics';
 import Topic from './Components/Topic';
+import Nav from './Components/Nav';
 
 function App() {
 
   return (
-    <Routes>
-      <Route path = "/" element = {<Home/>}/>
-      <Route path = "/:article_id" element = {<Article/>}/>
-      <Route path = "/topics" element = {<Topics/>}/>
-      <Route path = "/topics/:topic" element = {<Topic/>}/>
-    </Routes>
+    <>
+      <Nav/>
+      <Routes>
+        <Route path = "/" element = {<Home/>}/>
+        <Route path = "/:article_id" element = {<Article/>}/>
+        <Route path = "/topics" element = {<Topics/>}/>
+        <Route path = "/topics/:topic" element = {<Topic/>}/>
+      </Routes>
+    </>
   )
 }
 

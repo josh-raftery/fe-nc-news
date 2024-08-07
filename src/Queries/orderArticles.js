@@ -1,4 +1,4 @@
 export default [
-    {order: "asc", name: "Top"},
-    {order: "desc", name: "Bottom"}
+    {order: "asc", name: "Bottom"},
+    {order: "desc", name: "Top"}
 ]
