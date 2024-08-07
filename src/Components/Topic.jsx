@@ -6,7 +6,6 @@ import Loading from "./Loading"
 function Topic(){
     const [topicInput, setTopicInput] = useState("")
     const {topic} = useParams()
-    console.log(topic)
 
     useEffect(() => {
         setTopicInput(topic)

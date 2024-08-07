@@ -13,8 +13,6 @@ function Topics(){
         })
     },[])
 
-    console.log(topics)
-
     return (
         <div>
             {topics.map((topic) => {

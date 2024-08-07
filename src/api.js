@@ -4,15 +4,14 @@ const api = axios.create({
   baseURL: "https://be-nc-news-ml9n.onrender.com/api",
 });
 
-function getArticles(topic) {
+function getArticles(queryString) {
   let endpoint = "/articles"
-  if(topic){
-    endpoint += `?topic=${topic}`
-  }
+  endpoint += queryString
+
   console.log(endpoint)
+  
   return api.get(endpoint)
   .then(({ data }) => {
-    console.log(data.articles)
     return data.articles;
   });
 }
