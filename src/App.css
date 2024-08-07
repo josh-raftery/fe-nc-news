@@ -4,6 +4,12 @@
     justify-content: center;
 }
 
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .loading-container {
     display: flex;
     justify-content: center;

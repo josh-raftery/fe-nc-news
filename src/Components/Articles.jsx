@@ -1,34 +1,37 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { getArticles } from "../api";
 import SortBy from "./SortBy";
 import Order from "./Order";
+import { ErrorContext } from "../contexts/Error";
 
 function Articles({topicInput}){
 
     const [articles, setArticles] = useState([])
     const [orderInput, setOrderInput] = useState("")
     const [sortByInput, setSortByInput] = useState("")
+    const { setError } = useContext(ErrorContext)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        const queryArray = []
-        let queryString = ''
+        const params = {}
         if(topicInput){
-            queryArray.push(`?topic=${topicInput}`)
+            params.topic = topicInput
         }
         if(orderInput){
-            queryArray.push(`?order=${orderInput}`)
+            params.order = orderInput
         }
         if(sortByInput){
-            queryArray.push(`?sort_by=${sortByInput}`)
+            params.sort_by = sortByInput
         }
-        if(queryArray.length > 0){
-            queryString = queryArray.join('&')
-        }
-        getArticles(queryString)
+        getArticles(params)
         .then((articles) => {
             setArticles(articles)
-        });
+        })
+        .catch((err) => {
+            setError([{code: 404, msg: 'Not Found'}])
+            navigate('/error')
+        })
     }, [topicInput,orderInput,sortByInput]);
 
     return (
