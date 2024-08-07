@@ -6,7 +6,7 @@ function Nav(){
     const { user } = useContext(UserContext)
     const [userData] = user
     return (
-        <div className="navbar bg-primary text-primary-content">
+        <div style={{marginBottom: "2rem"}} className="navbar bg-primary text-primary-content">
             <div className="flex-1">
             <Link to = "/">
                 <div className="btn btn-ghost text-xl">NC News</div>

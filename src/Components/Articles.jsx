@@ -35,7 +35,7 @@ function Articles({topicInput}){
     }, [topicInput,orderInput,sortByInput]);
 
     return (
-        <div>
+        <div style={{marginLeft:"1rem"}}>
             <div 
             className="flex"
             style={{
