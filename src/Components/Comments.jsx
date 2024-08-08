@@ -81,7 +81,7 @@ function Comments({ article_id }) {
   return (
     <>
       <div className="post-comment">
-      <label className="form-control w-full max-w-xs">
+        <label className="form-control w-full max-w-xs">
           <input
             value={comment}
             type="text"
@@ -97,24 +97,27 @@ function Comments({ article_id }) {
       </div>
         {comments.map((currentComment,index) => {
             return (
+              <div className="comment-div">
                 <div 
                 key={currentComment.comment_id} 
                 className="card bg-base-100 shadow-xl"
                 style={deleteFailComment === currentComment.comment_id ? {border: "solid red"} : {}}
                 >
-                <div className="card-body">
-                    <p>{currentComment.body}</p>
-                    {currentComment.author === userData.username &&  
-                      <div className="card-actions justify-end">
-                          <button className="btn btn-outline">Edit</button>
-                          <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-outline"}>X</button>
-                          <div className="label">
-                            <span className="label-text-alt">{deleteFailComment === currentComment.comment_id ? "Poor connection, try again later" : ""}</span>
-                            </div>
-                        </div>
-                    }
+                  <div style={{marginBottom: "2rem"}}
+                  className="card-body">
+                      <p>{currentComment.body}</p>
+                      {currentComment.author === userData.username &&  
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-outline">Edit</button>
+                            <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-outline"}>X</button>
+                            <div className="label">
+                              <span className="label-text-alt">{deleteFailComment === currentComment.comment_id ? "Poor connection, try again later" : ""}</span>
+                              </div>
+                          </div>
+                      }
+                  </div>
                 </div>
-                </div>
+              </div>
             )
         })}
     </>
