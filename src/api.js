@@ -51,6 +51,13 @@ function getTopics() {
   })
 }
 
+function getUser(username){
+  return api.get(`/users/${username}`)
+  .then(({data}) => {
+    return data.user
+  })
+}
+
 export {
   getArticles,
   getArticle,
@@ -59,4 +66,5 @@ export {
   postComment,
   deleteComment,
   getTopics,
+  getUser,
 };

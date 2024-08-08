@@ -4,6 +4,9 @@ import { getArticle, incArticleVotes } from "../api";
 import Comments from "./Comments";
 import Loading from "./Loading";
 import { ErrorContext } from "../contexts/Error";
+import Author from "./Author";
+import TopArticles from "./TopArticles";
+import RelatedArticles from "./RelatedArticles";
 
 function Article() {
   const [article, setArticle] = useState({});
@@ -14,6 +17,10 @@ function Article() {
   const [hasUpVoted,setHasUpVoted] = useState(false)
   const [hasDownVoted,setHasDownVoted] = useState(false)
   const [parsedDate,setParsedDate] = useState("")
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   const { article_id } = useParams();
   const { setError } = useContext(ErrorContext)
@@ -44,7 +51,18 @@ function Article() {
       setError([{code: 404, msg: 'Not Found'}])
       navigate('/error')
     })
-  }, []);
+  }, [article_id]);
+
+  useEffect(() => {
+    function handleResize(){
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  },[])
 
   if (loading) {
     return <Loading />;
@@ -57,7 +75,7 @@ function Article() {
       setUpvote(false)
       setHasUpVoted(false)
       increment = -1
-    } else{
+    } else { 
       setUpvote(true)
       setHasUpVoted(true)
     }
@@ -115,34 +133,42 @@ function Article() {
     })
   }
 
+  // width 768 grid 2 cols
+
+  // width 1037 grid 3 cols "grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+
   return (
     <>
-      <div className="article">
-        <div className="card bg-base-100 w-96 shadow-xl">
-          <figure className="figure-container">
-            <img src={article.article_img_url} alt={article.title} />
-            <div className="card-actions button-container">
+      <div className={windowDimensions.width >= 1037 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : (windowDimensions.width >= 768 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2" : "grid gap-[50px] grid-cols-1")}>
+        {windowDimensions.width >= 768 && <TopArticles/>}
+        <div className="article">
+          <div className="card bg-base-100 w-96 shadow-xl">
+            <figure className="figure-container">
+              <img src={article.article_img_url} alt={article.title} />
+              <div className="card-actions button-container">
+                {/* I will make these buttons appear conditionally once I have made a component for users and only allow it if user === author */}
+              </div>
+            </figure>
+            <Author className = "card-body w-50" author = {article.author}/>
+            <div className="votes-btn">
+              <button onClick={handleUpvote} className={!upvote ? "btn btn-neutral" : "btn btn-accent"} >+</button>
+              <div className="badge">{votes}</div>
+              <button onClick={handleDownvote} className={!downVote ? "btn" : "btn btn-error"} >-</button>
+            </div>
+            <div className="card-body w-50">
+              <p><em>{parsedDate}</em></p>
+              <p>{article.topic}</p>
+              <h2 className="card-title">{article.title}</h2>
+              <p>{article.body}</p>
+            </div>
+            <div style={{marginBottom: "2rem"}} className="card-actions justify-end">
+              <button className = "btn btn-outline">Edit</button>
+              <button className="btn btn-outline">X</button>
               {/* I will make these buttons appear conditionally once I have made a component for users and only allow it if user === author */}
             </div>
-          </figure>
-          <div className="votes-btn">
-            <button onClick={handleUpvote} className={!upvote ? "btn btn-neutral" : "btn btn-accent"} >+</button>
-            <div className="badge">{votes}</div>
-            <button onClick={handleDownvote} className={!downVote ? "btn" : "btn btn-error"} >-</button>
-          </div>
-          <div className="card-body w-50">
-            <p><em>{parsedDate}</em></p>
-            <p>{article.topic}</p>
-            <h2 className="card-title">{article.title}</h2>
-            <p>{article.body}</p>
-            <p>Written by: {article.author}</p>
-          </div>
-          <div style={{marginBottom: "2rem"}} className="card-actions justify-end">
-            <button className = "btn btn-outline">Edit</button>
-            <button className="btn btn-outline">X</button>
-            {/* I will make these buttons appear conditionally once I have made a component for users and only allow it if user === author */}
           </div>
         </div>
+        {windowDimensions.width >= 1037 && <RelatedArticles topic={article.topic}/>}
       </div>
       <Comments article_id={article.article_id} />
     </>
