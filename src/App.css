@@ -4,6 +4,7 @@
     justify-content: center;
 }
 
+.author-div,
 .sort-order-div,
 .articles-div,
 .error{
@@ -23,9 +24,14 @@
     left: 0;
 }
 
-.topics,
-.post-comment,
 .votes-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.topics,
+.post-comment{
     display: flex;
     justify-content: center;
     margin-top: 2rem;
@@ -35,15 +41,25 @@
     margin-right: 1rem;
 }
 
+.author-div{
+    margin-top: 1rem
+}
+
 .badge{
     margin-right: 1rem;
     margin-top: 1rem;
 }
 
+.author-div,
 .dropdown ul li{
     cursor: pointer;
 }
 
+
 .comment-div{
+    margin-bottom: 1rem;
+}
+
+.preview div{
     margin-bottom: 1rem;
 }

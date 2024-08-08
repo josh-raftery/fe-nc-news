@@ -65,13 +65,13 @@ function Articles({topicInput}){
                     {!topicInput && <TopicsDropDown topicsDropDown={topicsDropDown} setTopicsDropDown={setTopicsDropDown} isTopicDropDown = {isTopicDropDown} setIsTopicDropDown = {setIsTopicDropDown} />}
                     <SortBy setSortByInput={setSortByInput} isSorted = {isSorted} setIsSorted = {setIsSorted} />
                     <Order setOrderInput={setOrderInput} isOrdered = {isOrdered} setIsOrdered = {setIsOrdered} />
-                    <button onClick={handleClear} class="btn btn-outline">Clear</button>
+                    <button onClick={handleClear} className="btn btn-outline">Clear</button>
                 </div>
                 <div className="articles-div">
                 <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {articles.map((article) => {
                         return (
-                            <div className="card card-compact bg-base-100 w-96 shadow-xl">
+                            <div key={article.article_id} className="card card-compact bg-base-100 w-96 shadow-xl">
                                 <Link key = {article.article_id} to = {`/${article.article_id}`} >
                                     <figure>
                                         <img

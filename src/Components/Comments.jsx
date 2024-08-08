@@ -80,7 +80,7 @@ function Comments({ article_id }) {
 
   return (
     <>
-      <div className="post-comment">
+      <div style={{marginLeft: "1rem"}} className="post-comment">
         <label className="form-control w-full max-w-xs">
           <input
             value={comment}
@@ -97,7 +97,7 @@ function Comments({ article_id }) {
       </div>
         {comments.map((currentComment,index) => {
             return (
-              <div className="comment-div">
+              <div key = {currentComment.comment_id} className="comment-div">
                 <div 
                 key={currentComment.comment_id} 
                 className="card bg-base-100 shadow-xl"
