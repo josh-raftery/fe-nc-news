@@ -4,6 +4,8 @@
     justify-content: center;
 }
 
+.sort-order-div,
+.articles-div,
 .error{
     display: flex;
     justify-content: center;
@@ -21,6 +23,7 @@
     left: 0;
 }
 
+.topics,
 .post-comment,
 .votes-btn{
     display: flex;
@@ -39,4 +42,8 @@
 
 .dropdown ul li{
     cursor: pointer;
+}
+
+.comment-div{
+    margin-bottom: 1rem;
 }

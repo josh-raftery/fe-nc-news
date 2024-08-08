@@ -1,10 +1,9 @@
 import sortByArticles from "../Queries/sortByArticles"
 import { useEffect, useState } from "react"
 
-function SortBy({setSortByInput}){
+function SortBy({setSortByInput, setIsSorted, isSorted}){
 
     const [sortBy, setSortBy] = useState([])
-    const [isSorted, setIsSorted] = useState(false)
     const [sortByName,setSortByName] = useState("")
 
     useEffect(() => {

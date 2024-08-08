@@ -13,7 +13,7 @@ function Nav(){
             </Link>
             </div>
             <Link to = "topics">
-                <button className="btn btn-info">Topics</button>
+                <button style={{fontSize: "20px"}} className="btn btn-ghost">Topics</button>
             </Link>
             <div className="flex-none">
                 <div className="dropdown dropdown-end">

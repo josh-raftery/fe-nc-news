@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import orderArticles from "../Queries/orderArticles"
 
-function Order({setOrderInput}){
+function Order({setOrderInput, setIsOrdered, isOrdered}){
     const [order, setOrder] = useState([])
     const [orderedName,setOrderedName] = useState("")
-    const [isOrdered, setIsOrdered] = useState(false)
 
     useEffect(() => {
         setOrder(orderArticles)
