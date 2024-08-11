@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import orderArticles from "../Queries/orderArticles"
 
-function Order({setOrderInput, setIsOrdered, isOrdered}){
+function Order({setPage,setMaxPages,setPagination,setOrderInput, setIsOrdered, isOrdered}){
     const [order, setOrder] = useState([])
     const [orderedName,setOrderedName] = useState("")
 
@@ -10,6 +10,10 @@ function Order({setOrderInput, setIsOrdered, isOrdered}){
     },[])
 
     function handleClick(orderInput){
+        setPage(1)
+        setPagination(false)
+        setMaxPages(false)
+        
         setOrderInput(orderInput.order)
         if(!orderInput){
             setIsOrdered(false)

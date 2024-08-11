@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { deleteComment, getComments, postComment } from "../api";
 import Loading from "./Loading";
 import { UserContext } from "../contexts/User";
+import Delete from "./Delete";
+import Edit from "./Edit";
 
 function Comments({ article_id }) {
 
@@ -108,8 +110,10 @@ function Comments({ article_id }) {
                       <p>{currentComment.body}</p>
                       {currentComment.author === userData.username &&  
                         <div className="card-actions justify-end">
-                            <button className="btn btn-outline">Edit</button>
-                            <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-outline"}>X</button>
+                          <div className="edit-delete">
+                            <button className="btn btn-ghost"><Edit/></button>
+                            <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-ghost"}><Delete/></button>
+                          </div>
                             <div className="label">
                               <span className="label-text-alt">{deleteFailComment === currentComment.comment_id ? "Poor connection, try again later" : ""}</span>
                               </div>

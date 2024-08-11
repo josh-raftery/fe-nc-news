@@ -1,20 +1,41 @@
 import { Link } from "react-router-dom"
 import { UserContext } from "../contexts/User";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
-function Nav(){
+function Nav({setIsDark,isDark}){
     const { user } = useContext(UserContext)
     const [userData] = user
+
+    function switchTheme(){
+        setIsDark((currTheme) => {
+            const newTheme = !currTheme
+            localStorage.setItem('theme', JSON.stringify(newTheme))
+            return newTheme
+        })
+    }
+
+    useEffect(() => {
+        const isDarkLocal = JSON.parse(localStorage.getItem('theme'))
+        if(isDarkLocal !== null){
+          setIsDark(isDarkLocal)
+        }
+        document.documentElement.setAttribute('data-theme',isDark ? "dark" : "cupcake")
+      },[isDark])
+
     return (
         <div style={{marginBottom: "2rem"}} className="navbar bg-primary text-primary-content">
             <div className="flex-1">
             <Link to = "/">
-                <div className="btn btn-ghost text-xl">NC News</div>
+                <div className="btn btn-ghost text-xl"><img className="home-btn" src={'../../design/home.png'} ></img></div>
+            </Link>
+            <Link to = "topics">
+                <button style={{fontSize: "20px"}} className="btn btn-ghost"><img className="topics-button" src="../../design/topics.png"/></button>
+            </Link>
+            <Link to = "/postArticle">
+                <button style={{fontSize: "20px"}} className="btn btn-ghost"><img className="post-article-button" src="../../design/post.png"/></button>
             </Link>
             </div>
-            <Link to = "topics">
-                <button style={{fontSize: "20px"}} className="btn btn-ghost">Topics</button>
-            </Link>
+            <button style={{marginRight: "1rem"}} onClick = {switchTheme} ><img className="day-night" src={isDark ? "../../design/day.png" : "../../design/night.png"} ></img></button>
             <div className="flex-none">
                 <div className="dropdown dropdown-end">
                 <div tabIndex="0" role="button" className="btn btn-ghost btn-circle avatar">

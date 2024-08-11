@@ -1,7 +1,7 @@
 import sortByArticles from "../Queries/sortByArticles"
 import { useEffect, useState } from "react"
 
-function SortBy({setSortByInput, setIsSorted, isSorted}){
+function SortBy({setPage,setMaxPages,setPagination,setSortByInput, setIsSorted, isSorted}){
 
     const [sortBy, setSortBy] = useState([])
     const [sortByName,setSortByName] = useState("")
@@ -11,6 +11,10 @@ function SortBy({setSortByInput, setIsSorted, isSorted}){
     },[])
 
     function handleClick(sortInput){
+        setPage(1)
+        setPagination(false)
+        setMaxPages(false)
+        
         setSortByInput(sortInput.sort)
         if(!sortInput){
             setIsSorted(false)

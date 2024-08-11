@@ -58,6 +58,14 @@ function getUser(username){
   })
 }
 
+function postArticle(request){
+  console.log(request)
+  return api.post(`/articles`,request)
+  .then(({data}) => {
+    return data.article
+  })
+}
+
 export {
   getArticles,
   getArticle,
@@ -67,4 +75,5 @@ export {
   deleteComment,
   getTopics,
   getUser,
+  postArticle,
 };
