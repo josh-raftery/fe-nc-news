@@ -7,8 +7,11 @@ import { ErrorContext } from "../contexts/Error";
 import Author from "./Author";
 import TopArticles from "./TopArticles";
 import RelatedArticles from "./RelatedArticles";
+import Edit from "./Edit";
+import Delete from "./Delete";
+import { UserContext } from "../contexts/User";
 
-function Article() {
+function Article({isDark}) {
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
   const [upvote, setUpvote] = useState(false)
@@ -21,6 +24,8 @@ function Article() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
+  const { user } = useContext(UserContext)
+  const [userData] = user
 
   const { article_id } = useParams();
   const { setError } = useContext(ErrorContext)
@@ -151,9 +156,19 @@ function Article() {
             </figure>
             <Author className = "card-body w-50" author = {article.author}/>
             <div className="votes-btn">
-              <button onClick={handleUpvote} className={!upvote ? "btn btn-neutral" : "btn btn-accent"} >+</button>
+              {isDark ? 
+               <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../../design/upvote-night.png" : "../../design/uparrow-night.png" } /></button>
+                : 
+                <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../../design/upvote.png" : "../../design/up-arrow.png" } /></button>
+              }
               <div className="badge">{votes}</div>
-              <button onClick={handleDownvote} className={!downVote ? "btn" : "btn btn-error"} >-</button>
+              {isDark ? 
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../../design/downvote-night.png" : "../../design/down-arrow-night.png" } /></button>
+              :
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../../design/downvote.png" : "../../design/down-arrow.png" } /></button>
+              }
+
+              
             </div>
             <div className="card-body w-50">
               <p><em>{parsedDate}</em></p>
@@ -161,11 +176,13 @@ function Article() {
               <h2 className="card-title">{article.title}</h2>
               <p>{article.body}</p>
             </div>
-            <div style={{marginBottom: "2rem"}} className="card-actions justify-end">
-              <button className = "btn btn-outline">Edit</button>
-              <button className="btn btn-outline">X</button>
+            {userData.username === article.author && 
+            <div style={{marginBottom: "2rem"}} className="edit-delete">
+              <button className = "btn btn-ghost"><Edit isDark={isDark} /></button>
+              <button className="btn btn-ghost"><Delete isDark={isDark} /></button>
               {/* I will make these buttons appear conditionally once I have made a component for users and only allow it if user === author */}
-            </div>
+            </div>}
+            
           </div>
         </div>
         {windowDimensions.width >= 1037 && <RelatedArticles topic={article.topic}/>}

@@ -4,7 +4,7 @@ import Articles from "./Articles"
 import Loading from "./Loading"
 import { ErrorContext } from "../contexts/Error"
 
-function Topic(){
+function Topic({isDark}){
     const [topicInput, setTopicInput] = useState("")
     const {topic} = useParams()
     const { setError } = useContext(ErrorContext)
@@ -30,7 +30,7 @@ function Topic(){
     }
 
     return (
-        <Articles topicInput={topicInput}/>
+        <Articles isDark={isDark} topicInput={topicInput}/>
     )
 }
 

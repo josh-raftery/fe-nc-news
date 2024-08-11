@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getTopics } from "../api"
 
 
-function TopicsDropDown({topicsDropDown,setTopicsDropDown,isTopicDropDown,setIsTopicDropDown}){
+function TopicsDropDown({setPage,setMaxPages,setPagination,missingTopic,topicsDropDown,setTopicsDropDown,isTopicDropDown,setIsTopicDropDown}){
     const [topics, setTopics] = useState([])
     
     
@@ -14,6 +14,10 @@ function TopicsDropDown({topicsDropDown,setTopicsDropDown,isTopicDropDown,setIsT
     },[])
 
     function handleClick(topic){
+        setPage(1)
+        setPagination(false)
+        setMaxPages(false)
+
         setTopicsDropDown(topic)
         if(!topic){
             setIsTopicDropDown(false)
@@ -25,7 +29,7 @@ function TopicsDropDown({topicsDropDown,setTopicsDropDown,isTopicDropDown,setIsT
     return (
         <div>
             <div className="dropdown">
-                <div tabIndex={0} role="button"  className={isTopicDropDown ? "btn btn-outline btn-success" : "btn btn-outline"}>{isTopicDropDown ? topicsDropDown : "Topics"}</div>
+                <div tabIndex={0} role="button"  className={isTopicDropDown ? "btn btn-outline btn-success" : missingTopic ? "btn btn-outline btn-error" : "btn btn-outline"}>{isTopicDropDown ? topicsDropDown : missingTopic ? "Select Topic!" : "Topics"}</div>
                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                     {topics.map((topic) => {
                         return(

@@ -4,6 +4,9 @@
     justify-content: center;
 }
 
+.article-info,
+.article-info p,
+.more-pages,
 .author-div,
 .sort-order-div,
 .articles-div,
@@ -28,6 +31,13 @@
     display: flex;
     justify-content: center;
     margin-top: 1rem;
+}
+
+.home-btn,
+.topics-button,
+.post-article-button,
+.day-night{
+    width: 40px;
 }
 
 .topics,
@@ -55,6 +65,14 @@
     cursor: pointer;
 }
 
+.edit-delete,
+.article-info{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 10px;
+    margin-right: 10px; 
+}
 
 .comment-div{
     margin-bottom: 1rem;

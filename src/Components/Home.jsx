@@ -1,13 +1,13 @@
 import { useState } from "react";
 import Articles from "./Articles";
 
-function Home() {
+function Home({isDark}) {
 
   const [topicInput, setTopicInput] = useState("")
 
   return (
     <div>
-        <Articles setTopicInput={setTopicInput} />
+        <Articles isDark={isDark} setTopicInput={setTopicInput} />
     </div>
   )
 }
