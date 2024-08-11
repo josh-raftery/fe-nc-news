@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { getArticle, incArticleVotes } from "../api";
+import { deleteArticle, getArticle, incArticleVotes } from "../api";
 import Comments from "./Comments";
 import Loading from "./Loading";
 import { ErrorContext } from "../contexts/Error";
@@ -138,6 +138,17 @@ function Article({isDark}) {
     })
   }
 
+  function editArticle(){
+
+  }
+
+  function handleDelete(article_id){
+    deleteArticle(article_id)
+    .then(() => {
+      navigate('/')
+    })
+  }
+
   // width 768 grid 2 cols
 
   // width 1037 grid 3 cols "grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
@@ -157,15 +168,15 @@ function Article({isDark}) {
             <Author className = "card-body w-50" author = {article.author}/>
             <div className="votes-btn">
               {isDark ? 
-               <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../../design/upvote-night.png" : "../../design/uparrow-night.png" } /></button>
+               <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../design/upvote-night.png" : "../design/uparrow-night.png" } /></button>
                 : 
-                <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../../design/upvote.png" : "../../design/up-arrow.png" } /></button>
+                <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../design/upvote.png" : "../design/up-arrow.png" } /></button>
               }
               <div className="badge">{votes}</div>
               {isDark ? 
-              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../../design/downvote-night.png" : "../../design/down-arrow-night.png" } /></button>
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../design/downvote-night.png" : "../design/down-arrow-night.png" } /></button>
               :
-              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../../design/downvote.png" : "../../design/down-arrow.png" } /></button>
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../design/downvote.png" : "../design/down-arrow.png" } /></button>
               }
 
               
@@ -179,8 +190,7 @@ function Article({isDark}) {
             {userData.username === article.author && 
             <div style={{marginBottom: "2rem"}} className="edit-delete">
               <button className = "btn btn-ghost"><Edit isDark={isDark} /></button>
-              <button className="btn btn-ghost"><Delete isDark={isDark} /></button>
-              {/* I will make these buttons appear conditionally once I have made a component for users and only allow it if user === author */}
+              <button onClick={() => handleDelete(article.article_id)} className="btn btn-ghost"><Delete isDark={isDark} /></button>
             </div>}
             
           </div>
