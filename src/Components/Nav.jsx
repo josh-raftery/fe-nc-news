@@ -26,16 +26,16 @@ function Nav({setIsDark,isDark}){
         <div style={{marginBottom: "2rem"}} className="navbar bg-primary text-primary-content">
             <div className="flex-1">
             <Link to = "/">
-                <div className="btn btn-ghost text-xl"><img className="home-btn" src='./assets/home.png' ></img></div>
+                <div className="btn btn-ghost text-xl"><img className="home-btn" src='/assets/home.png' ></img></div>
             </Link>
             <Link to = "topics">
-                <button style={{fontSize: "20px"}} className="btn btn-ghost"><img className="topics-button" src="./assets/topics.png"/></button>
+                <button style={{fontSize: "20px"}} className="btn btn-ghost"><img className="topics-button" src="/assets/topics.png"/></button>
             </Link>
             <Link to = "/postArticle">
-                <button style={{fontSize: "20px"}} className="btn btn-ghost"><img className="post-article-button" src="./assets/post.png"/></button>
+                <button style={{fontSize: "20px"}} className="btn btn-ghost"><img className="post-article-button" src="/assets/post.png"/></button>
             </Link>
             </div>
-            <button style={{marginRight: "1rem"}} onClick = {switchTheme} ><img className="day-night" src={isDark ? "./assets/day.png" : "./assets/night.png"} ></img></button>
+            <button style={{marginRight: "1rem"}} onClick = {switchTheme} ><img className="day-night" src={isDark ? "/assets/day.png" : "/assets/night.png"} ></img></button>
             <div className="flex-none">
                 <div className="dropdown dropdown-end">
                 <div tabIndex="0" role="button" className="btn btn-ghost btn-circle avatar">
