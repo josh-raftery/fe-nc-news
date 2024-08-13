@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/User";
 import Delete from "./Delete";
 import Edit from "./Edit";
 
-function Comments({ article_id }) {
+function Comments({ article_id, isDark }) {
 
   const [badComment,setBadComment] = useState(false)
   const [badPost, setBadPost] = useState(false)
@@ -80,6 +80,8 @@ function Comments({ article_id }) {
     )
   }
 
+  console.log(isDark, ' comments')
+
   return (
     <>
       <div style={{marginLeft: "1rem"}} className="post-comment">
@@ -111,8 +113,8 @@ function Comments({ article_id }) {
                       {currentComment.author === userData.username &&  
                         <div className="card-actions justify-end">
                           <div className="edit-delete">
-                            <button className="btn btn-ghost"><Edit/></button>
-                            <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-ghost"}><Delete/></button>
+                            <button className="btn btn-ghost"><Edit isDark={isDark} /></button>
+                            <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-ghost"}><Delete isDark={isDark} /></button>
                           </div>
                             <div className="label">
                               <span className="label-text-alt">{deleteFailComment === currentComment.comment_id ? "Poor connection, try again later" : ""}</span>

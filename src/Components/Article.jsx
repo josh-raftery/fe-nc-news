@@ -158,7 +158,7 @@ function Article({isDark}) {
       <div className={windowDimensions.width >= 1037 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : (windowDimensions.width >= 768 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2" : "grid gap-[50px] grid-cols-1")}>
         {windowDimensions.width >= 768 && <TopArticles/>}
         <div className="article">
-          <div className="card bg-base-100 w-96 shadow-xl">
+          <div style={{paddingBottom: "3.5rem"}} className="card bg-base-100 w-96 shadow-xl">
             <figure className="figure-container">
               <img src={article.article_img_url} alt={article.title} />
               <div className="card-actions button-container">
@@ -168,19 +168,17 @@ function Article({isDark}) {
             <Author className = "card-body w-50" author = {article.author}/>
             <div className="votes-btn">
               {isDark ? 
-               <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "./assets/upvote-night.png" : "./assets/uparrow-night.png" } /></button>
+               <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "/assets/upvote-night.png" : "/assets/uparrow-night.png" } /></button>
                 : 
-                <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "./assets/upvote.png" : "./assets/up-arrow.png" } /></button>
+                <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "/assets/upvote.png" : "/assets/up-arrow.png" } /></button>
               }
               <div className="badge">{votes}</div>
               {isDark ? 
-              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "./assets/downvote-night.png" : "./assets/down-arrow-night.png" } /></button>
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "/assets/downvote-night.png" : "/assets/down-arrow-night.png" } /></button>
               :
-              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "./assets/downvote.png" : "./assets/down-arrow.png" } /></button>
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "/assets/downvote.png" : "/assets/down-arrow.png" } /></button>
               }
-
-              
-            </div>
+          </div>
             <div className="card-body w-50">
               <p><em>{parsedDate}</em></p>
               <p>{article.topic}</p>
@@ -188,7 +186,7 @@ function Article({isDark}) {
               <p>{article.body}</p>
             </div>
             {userData.username === article.author && 
-            <div style={{marginBottom: "2rem"}} className="edit-delete">
+            <div style={{ marginBottom: "2rem"}} className="edit-delete">
               <button className = "btn btn-ghost"><Edit isDark={isDark} /></button>
               <button onClick={() => handleDelete(article.article_id)} className="btn btn-ghost"><Delete isDark={isDark} /></button>
             </div>}
@@ -197,7 +195,7 @@ function Article({isDark}) {
         </div>
         {windowDimensions.width >= 1037 && <RelatedArticles topic={article.topic}/>}
       </div>
-      <Comments article_id={article.article_id} />
+      <Comments isDark={isDark} article_id={article.article_id} />
     </>
   );
 }
