@@ -151,11 +151,11 @@ function Articles({ isDark, topicInput }) {
                                             <em>{article.topic}</em>
                                         </p>
                                         <div className="article-info">
-                                            <p>{article.comment_count}<img style={{marginRight: "0.5rem",marginLeft: "0.3rem", marginTop: "0.1rem" , width: "25px"}} src={isDark ? '../design/comment-night.png' : "../design/comments.png"} /></p>
+                                            <p>{article.comment_count}<img style={{marginRight: "0.5rem",marginLeft: "0.3rem", marginTop: "0.1rem" , width: "25px"}} src={isDark ? './assets/comment-night.png' : "./assets/comments.png"} /></p>
                                             <p>{article.votes}{isDark ? 
-                                            <img style={{width: "25px"}} src={article.votes >= 0 ? '../design/upvote-night.png' : '../design/downvote-night.png'} /> 
+                                            <img style={{width: "25px"}} src={article.votes >= 0 ? './assets/upvote-night.png' : './assets/downvote-night.png'} /> 
                                             : 
-                                            <img style={{width: "25px"}} src={article.votes >= 0 ? '../design/upvote.png' : '../design/downvote.png'} />}
+                                            <img style={{width: "25px"}} src={article.votes >= 0 ? './assets/upvote.png' : './assets/downvote.png'} />}
                                             </p>
                                         </div>
                                     </div>
