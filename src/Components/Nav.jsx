@@ -26,7 +26,7 @@ function Nav({setIsDark,isDark}){
         <div style={{marginBottom: "2rem"}} className="navbar bg-primary text-primary-content">
             <div className="flex-1">
             <Link to = "/">
-                <div className="btn btn-ghost text-xl"><img className="home-btn" src={'src/design/home.png'} ></img></div>
+                <div className="btn btn-ghost text-xl"><img className="home-btn" src='./public/assets/home.png' ></img></div>
             </Link>
             <Link to = "topics">
                 <button style={{fontSize: "20px"}} className="btn btn-ghost"><img className="topics-button" src="../design/topics.png"/></button>
