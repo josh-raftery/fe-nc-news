@@ -168,15 +168,15 @@ function Article({isDark}) {
             <Author className = "card-body w-50" author = {article.author}/>
             <div className="votes-btn">
               {isDark ? 
-               <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../design/upvote-night.png" : "../design/uparrow-night.png" } /></button>
+               <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "./assets/upvote-night.png" : "./assets/uparrow-night.png" } /></button>
                 : 
-                <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "../design/upvote.png" : "../design/up-arrow.png" } /></button>
+                <button onClick={handleUpvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={upvote ? "./assets/upvote.png" : "./assets/up-arrow.png" } /></button>
               }
               <div className="badge">{votes}</div>
               {isDark ? 
-              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../design/downvote-night.png" : "../design/down-arrow-night.png" } /></button>
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "./assets/downvote-night.png" : "./assets/down-arrow-night.png" } /></button>
               :
-              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "../design/downvote.png" : "../design/down-arrow.png" } /></button>
+              <button onClick={handleDownvote} className="btn btn-ghost" ><img style={{width: "30px"}} src={downVote ? "./assets/downvote.png" : "./assets/down-arrow.png" } /></button>
               }
 
               
