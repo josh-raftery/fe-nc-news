@@ -1,9 +1,39 @@
+.post-article-container,
 .article{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
+.filter-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    width: 350px;
+    height: 100vh;
+    z-index: 50; /* Ensure it's in front */
+    background-color: var(--b1);
+
+}
+
+
+.filter-sidebar-buttons{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: right;
+
+}
+
+.filter-container{
+    margin-right: 5%;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: right;
+}
+
+.post-article-page,
 .article-info,
 .article-info p,
 .more-pages,
@@ -14,6 +44,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.post-article-container{
+    width: max-content;
+    padding:1rem
 }
 
 .loading-container {
@@ -74,9 +109,13 @@
     margin-right: 10px; 
 }
 
-.article div{
-    
-}
+/* .close-popup{
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 10px; 
+  } */
 
 .comment-div{
     margin-bottom: 1rem;

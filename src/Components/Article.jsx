@@ -25,7 +25,6 @@ function Article({isDark}) {
     height: window.innerHeight,
   });
   const { user } = useContext(UserContext)
-  const [userData] = user
 
   const { article_id } = useParams();
   const { setError } = useContext(ErrorContext)
@@ -185,7 +184,8 @@ function Article({isDark}) {
               <h2 className="card-title">{article.title}</h2>
               <p>{article.body}</p>
             </div>
-            {userData.username === article.author && 
+            {user &&
+            user.username === article.author && 
             <div style={{ marginBottom: "2rem"}} className="edit-delete">
               <button className = "btn btn-ghost"><Edit isDark={isDark} /></button>
               <button onClick={() => handleDelete(article.article_id)} className="btn btn-ghost"><Delete isDark={isDark} /></button>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getTopics } from "../api"
 
 
-function TopicsDropDown({setPage,setMaxPages,setPagination,missingTopic,topicsDropDown,setTopicsDropDown,isTopicDropDown,setIsTopicDropDown}){
+function TopicsDropDown({missingTopic,topicsDropDown,setTopicsDropDown,isTopicDropDown,setIsTopicDropDown}){
     const [topics, setTopics] = useState([])
     
     
@@ -14,9 +14,6 @@ function TopicsDropDown({setPage,setMaxPages,setPagination,missingTopic,topicsDr
     },[])
 
     function handleClick(topic){
-        setPage(1)
-        setPagination(false)
-        setMaxPages(false)
 
         setTopicsDropDown(topic)
         if(!topic){

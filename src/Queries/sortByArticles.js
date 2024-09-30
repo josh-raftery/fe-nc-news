@@ -1,5 +1,1 @@
-export default [
-    {sort: "created_at", name: "Date"},
-    {sort: "votes", name: "Votes"},
-    {sort: "comment_count", name: "Most Comments"}
-]
+export default {created_at:  "Date", votes: "Votes", comment_count: "Comments"}

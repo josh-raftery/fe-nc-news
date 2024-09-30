@@ -1,4 +1,1 @@
-export default [
-    {order: "asc", name: "Bottom"},
-    {order: "desc", name: "Top"}
-]
+export default {asc: "Low", desc: "High"}

@@ -5,6 +5,7 @@ const api = axios.create({
 });
 
 function getArticles(params) {
+  console.log(params,' params')
   return api.get('/articles',{params})
   .then(({ data }) => {
     return data.articles;
@@ -66,7 +67,14 @@ function postArticle(request){
 }
 
 function deleteArticle(article_id){
-  return api.delete(`articles/${article_id}`)
+  return api.delete(`/articles/${article_id}`)
+}
+
+function postUser(request){
+  return api.post('/users',request)
+  .then(({data}) => {
+    return data.user
+  })
 }
 
 export {
@@ -80,4 +88,5 @@ export {
   getUser,
   postArticle,
   deleteArticle,
+  postUser
 };
