@@ -15,7 +15,6 @@ function Comments({ article_id, isDark }) {
   const [didDeleteFail, setDidDeleteFail] = useState(false)
   const [deleteFailComment, setDeleteFailComment] = useState(0)
   const { user } = useContext(UserContext)
-  const [userData] = user
 
   function handleChange(event){
     setComment(event.target.value)
@@ -27,7 +26,7 @@ function Comments({ article_id, isDark }) {
       setBadComment(true)
     } else{
       setBadComment(false)
-      return postComment(article_id,userData.username,comment)
+      return postComment(article_id,user.username,comment)
       .then((newComment) => {
         setComments((currComments) => [newComment, ...currComments])
         setBadPost(false)
@@ -110,7 +109,7 @@ function Comments({ article_id, isDark }) {
                   <div style={{marginBottom: "2rem"}}
                   className="card-body">
                       <p>{currentComment.body}</p>
-                      {currentComment.author === userData.username &&  
+                      {currentComment.author === user.username &&  
                         <div className="card-actions justify-end">
                           <div className="edit-delete">
                             <button className="btn btn-ghost"><Edit isDark={isDark} /></button>
