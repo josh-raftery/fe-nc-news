@@ -3,11 +3,13 @@ import { useContext, useEffect, useState } from "react"
 import Articles from "./Articles"
 import Loading from "./Loading"
 import { ErrorContext } from "../contexts/Error"
+import { ThemeContext } from "../contexts/ThemeContext"
 
-function Topic({isDark}){
+function Topic(){
     const [topicInput, setTopicInput] = useState("")
     const {topic} = useParams()
     const { setError } = useContext(ErrorContext)
+    const {isDark} = useContext(ThemeContext)
 
     if(Number(topic)){
         setError([{
@@ -30,7 +32,7 @@ function Topic({isDark}){
     }
 
     return (
-        <Articles isDark={isDark} topicInput={topicInput}/>
+        <Articles topicInput={topicInput}/>
     )
 }
 

@@ -18,7 +18,6 @@ export default function SignIn() {
     
     function handleSubmit(e){
         e.preventDefault();
-        console.log(usernameInput)
         getUser(usernameInput)
         .then((user) => {
             setUser(user)
@@ -32,7 +31,7 @@ export default function SignIn() {
     }
 
     return (
-        <div className="flex flex-col items-center pb-10 m-4">
+        <div className="signin flex flex-col items-center pb-10 m-4">
         <form onSubmit={handleSubmit} className="card bg-primary-200 shadow-xl pt-10 pl-10 pr-10">
             <h2 className="card-title mb-4">Sign In</h2>
             {failure && <p className="text-red-500 text-sm mb-1">Username not found</p>}
