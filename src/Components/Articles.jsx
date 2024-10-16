@@ -19,6 +19,8 @@ function Articles() {
   const [titleInput, setTitleInput] = useState("")
   const [search,setSearch] = useState("")
   const [isLoading, setisLoading] = useState(true)
+  const [clearSearch,setClearSearch] = useState(false)
+  const [noResults, setNoResults] = useState(false)
   const [checkbox, setCheckBox] = useState({
     topic: "",
     sort_by: "",
@@ -41,17 +43,29 @@ function Articles() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const newCheckbox = { ...checkbox };
-    let newSearch = ""
+    //let newSearch = ""
 
     if (params.get("topic")) newCheckbox.topic = params.get("topic");
     if (params.get("sort_by")) newCheckbox.sort_by = params.get("sort_by");
     if (params.get("order")) newCheckbox.order = params.get("order");
 
-    if(params.get("title")){
-      newSearch = params.get("title")
-    } 
+    // if(!params.get("title") && search) {
+    //   params.delete('title')
+    //   setSearch("")
+    // }
+    console.log('test')
 
-    setSearch(newSearch)
+    if(params.get("title")){
+      setSearch(params.get("title"))
+    }
+
+    if(params.get("clear")){
+      setSearch("")
+      setPage(1)
+      setPagination(false)
+      setMaxPages(false)
+    }
+
     setCheckBox(newCheckbox);
   }, [location.search]);
 
@@ -74,6 +88,7 @@ function Articles() {
 
     getArticles(params)
       .then((articles) => {
+        setNoResults(false)
         setisLoading(false)
         setTitle(() => {
           let titleArr = []
@@ -95,8 +110,13 @@ function Articles() {
         }
       })
       .catch((err) => {
-        setError([{ code: 404, msg: "Not Found" }]);
-        navigate("/error");
+        setisLoading(false)
+        if(search){
+          setNoResults(true)
+        }else{
+          setError([{ code: 404, msg: "Not Found" }]);
+          navigate("/error");
+        }
       });
   }, [checkbox, page, limit, pagination,titleInput,search]);
 
@@ -113,7 +133,7 @@ function Articles() {
       pathname: "/",
       search: params.toString(),
     });
-  }, [checkbox, navigate]);
+  }, [checkbox, navigate, search]);
 
   function newPage() {
     setPagination(true);
@@ -142,6 +162,10 @@ function Articles() {
 
   if(isLoading){
     return <Loading/>
+  }
+
+  if(noResults){
+    return <h2 style={{marginTop: "10rem"}} >no results...</h2>
   }
 
   return (

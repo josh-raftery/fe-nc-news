@@ -139,10 +139,6 @@ function Article() {
     })
   }
 
-  function editArticle(){
-
-  }
-
   function handleDelete(article_id){
     deleteArticle(article_id)
     .then(() => {

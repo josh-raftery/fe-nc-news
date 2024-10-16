@@ -49,15 +49,13 @@ function Nav() {
   }
 
   function handleClear() {
-    const params = new URLSearchParams();
     setSearch("")
-    params.delete("title")
-    navigate(`/`);
+    navigate(`/?clear=true`);
   }
 
   return (
     <div
-      style={{ marginBottom: "0.3rem" }}
+      style={{ marginBottom: "0.3rem" }} 
       className="navbar bg-base-100 flex items-center justify-between p-4"
     >
       <div className="left-side-nav">
@@ -162,12 +160,15 @@ function Nav() {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="btn btn-sm btn-ghost btn-circle avatar"
           >
             <img
-              style={{ width: "25px", height: "30px" }}
+              style={{ objectFit: "scale-down"}}
               alt="Tailwind CSS Navbar component"
-              src={user ? user.avatar_url : "/assets/profile.png"}
+              src={user ? 
+                user.avatar_url : 
+                isDark ? "/assets/profile-night.png" : "/assets/profile.png"
+              }
             />
           </div>
           <ul

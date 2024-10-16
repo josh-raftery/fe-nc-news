@@ -68,7 +68,18 @@ function clearAll(){
           <div className="flex space-x-2">
             <button onClick={clearAll} className="btn btn-ghost">Clear All</button>
             <button className="btn btn-ghost" onClick={handleClose}>
-              <img style={{ width: "20px" }} src="/assets/close.png" />
+            <svg
+              fill="currentColor"
+              viewBox="0 0 10 10"
+              width="1.5em"
+              height="1.5em"
+              stroke="currentColor"
+              stroke-width="2"
+              className="clear-search opacity-80"
+            >
+              <line x1="1" y1="1" x2="9" y2="9" />
+              <line x1="9" y1="1" x2="1" y2="9" />
+            </svg>
             </button>
           </div>
         </div>
