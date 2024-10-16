@@ -4,8 +4,12 @@ import { getArticles } from "../api";
 import { ErrorContext } from "../contexts/Error";
 import Filters from "./Filters.jsx";
 import Opaque from "./Opaque.jsx";
+import Loading from "./Loading.jsx";
+import { ThemeContext } from "../contexts/ThemeContext.jsx";
 
-function Articles({ isDark }) {
+function Articles() {
+  const {isDark} = useContext(ThemeContext)
+
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState(false);
@@ -13,6 +17,8 @@ function Articles({ isDark }) {
   const [limit, setlimit] = useState(10);
   const [showFilters, setShowFilters] = useState(false);
   const [titleInput, setTitleInput] = useState("")
+  const [search,setSearch] = useState("")
+  const [isLoading, setisLoading] = useState(true)
   const [checkbox, setCheckBox] = useState({
     topic: "",
     sort_by: "",
@@ -25,26 +31,30 @@ function Articles({ isDark }) {
   );
 
   const navigate = useNavigate();
-  const location = useLocation(); // Access the current URL
+  const location = useLocation();
   const { setError } = useContext(ErrorContext);
 
   useEffect(() =>{
     setImgSrc(isDark ? "/assets/filter-night.png" : "/assets/filter.png");
   },[isDark])
 
-  // Step 1: Read URL query parameters on page load and set the filters
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const newCheckbox = { ...checkbox };
+    let newSearch = ""
 
     if (params.get("topic")) newCheckbox.topic = params.get("topic");
     if (params.get("sort_by")) newCheckbox.sort_by = params.get("sort_by");
     if (params.get("order")) newCheckbox.order = params.get("order");
 
+    if(params.get("title")){
+      newSearch = params.get("title")
+    } 
+
+    setSearch(newSearch)
     setCheckBox(newCheckbox);
   }, [location.search]);
 
-  // Step 2: Fetch articles whenever filters change (checkbox state)
   useEffect(() => {
     const params = {}
 
@@ -55,11 +65,16 @@ function Articles({ isDark }) {
       }
     }
 
+    if(search){
+      params.title = search
+    }
+
     if (page) params.p = page;
     if (limit) params.limit = limit;
 
     getArticles(params)
       .then((articles) => {
+        setisLoading(false)
         setTitle(() => {
           let titleArr = []
           if(checkbox.topic){
@@ -80,25 +95,24 @@ function Articles({ isDark }) {
         }
       })
       .catch((err) => {
-        console.log('here')
         setError([{ code: 404, msg: "Not Found" }]);
         navigate("/error");
       });
-  }, [checkbox, page, limit, pagination,titleInput]);
+  }, [checkbox, page, limit, pagination,titleInput,search]);
 
-  // Step 3: Update URL query params when filters change
   useEffect(() => {
+    setisLoading(true)
     const params = new URLSearchParams();
 
     if (checkbox.topic) params.set("topic", checkbox.topic);
     if (checkbox.sort_by) params.set("sort_by", checkbox.sort_by);
     if (checkbox.order) params.set("order", checkbox.order);
+    if (search) params.set("title", search)
 
     navigate({
       pathname: "/",
       search: params.toString(),
     });
-    console.log('after')
   }, [checkbox, navigate]);
 
   function newPage() {
@@ -110,6 +124,14 @@ function Articles({ isDark }) {
     }
   }
 
+  useEffect(() => {
+    if(totalCount){
+      if(page * limit > totalCount){
+        setMaxPages(true)
+      }   
+    }
+  },[page,totalCount])
+
   const handleMouseEnter = () => {
     setImgSrc(isDark ? "/assets/filter.png" : "/assets/filter-night.png");
   };
@@ -118,8 +140,12 @@ function Articles({ isDark }) {
     setImgSrc(isDark ? "/assets/filter-night.png" : "/assets/filter.png");
   };
 
+  if(isLoading){
+    return <Loading/>
+  }
+
   return (
-    <div style={{ marginLeft: "1rem" }}>
+    <div className="articles-container" style={{ marginTop: "88px", marginLeft: "1rem" }}>
       {showFilters && (
         <>
           <Filters
@@ -128,6 +154,9 @@ function Articles({ isDark }) {
             setCheckBox={setCheckBox}
             setShowFilters={setShowFilters}
             setTitleInput={setTitleInput}
+            setPage={setPage}
+            setPagination={setPagination}
+            setMaxPages={setMaxPages}
           />
           <Opaque />
         </>
@@ -149,12 +178,12 @@ function Articles({ isDark }) {
         </button>
       </div>
       <div className="articles-div">
-        <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {articles.map((article) => {
             return (
               <div
                 key={article.article_id}
-                className="card card-compact bg-base-100 w-96 shadow-xl"
+                className="article-card card card-compact bg-base-100 shadow-xl"
               >
                 <Link key={article.article_id} to={`/${article.article_id}`}>
                   <figure>
@@ -212,10 +241,10 @@ function Articles({ isDark }) {
           })}
         </div>
       </div>
-      <div className="more-pages">
+      <div style={{marginBottom: "2rem" }} className="more-pages">
         {!maxPages && (
           <button
-            style={{ marginTop: "2rem", marginBottom: "2rem" }}
+            style={{ marginTop: "2rem"}}
             onClick={newPage}
             className="btn btn-active btn-primary btn-wide"
           >

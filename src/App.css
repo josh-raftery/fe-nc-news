@@ -12,16 +12,77 @@
     padding: 1rem;
     width: 350px;
     height: 100vh;
-    z-index: 50; /* Ensure it's in front */
+    z-index: 50;
     background-color: var(--b1);
 
 }
 
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 88px;
+    background-color: var(--b1);
+    z-index: 30;
+}
+
+.article-card{
+    min-width: 380px;
+    min-height: 380px;
+    max-height: 400px;
+    max-width: 400px;
+}
+
+/* Content below the navbar, with no overlap */
+.error,
+.post-article-page,
+.signin,
+.preview,
+.article-container,
+.article,
+.comments {
+    margin-top: 88px; 
+    min-height: calc(100vh - 88px); 
+    overflow-y: auto; 
+}
+
+/* Add flex styles to center content if needed */
+.article-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Handle article card */
+
+
+.loading-container{
+    z-index: 600;
+}
+
+.clear-search{
+    cursor: pointer;
+}
+
+.clear-search:hover{
+    opacity: 100;
+}
 
 .filter-sidebar-buttons{
     display: flex;
     flex-wrap: nowrap;
     justify-content: right;
+
+}
+
+.left-side-nav{
+    min-width: 135px;
+}
+
+.search-bar{
+    display: flex;
+    justify-content: space-between;
 
 }
 
@@ -60,6 +121,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 60;
 }
 
 .votes-btn{

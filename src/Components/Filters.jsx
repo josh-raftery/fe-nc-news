@@ -2,7 +2,7 @@ import { useState } from "react";
 import Divider from "./Divider";
 import Next from "./Next";
 
-export default function Filters({checkbox, setCheckBox, setShowFilters, setTitle, setTitleInput}) {
+export default function Filters({checkbox, setCheckBox, setShowFilters, setTitle, setTitleInput,setPage,setPagination,setMaxPages}) {
 
 const [checkboxInput, setCheckBoxInput] = useState(checkbox)
 
@@ -19,6 +19,9 @@ function clearAll(){
   })
   setTitle("")
   setTitleInput("")
+  setPage(1)
+  setPagination(false)
+  setMaxPages(false)
 }
 
   function handleClose() {
@@ -26,20 +29,16 @@ function clearAll(){
   }
 
   function handleChange(input){
-    console.log(input ,'input beginning')
     setCheckBoxInput((currInput) => {
       let output = {...currInput}
       for(let key in input){
         let value = input[key]
         if(output[key] === value){
           output[key] = ''
-        } else {    const topicString = checkbox.topic
-          console.log(topicString, ' topic')
-            
+        } else {
           output[key] = value
         }
       }
-      console.log(output)
       return output
     })
   }
@@ -55,6 +54,9 @@ function clearAll(){
       setTitle("")
       setTitleInput("")
     }
+    setPage(1)
+    setPagination(false)
+    setMaxPages(false)
     setCheckBox(checkboxInput)
   }
 

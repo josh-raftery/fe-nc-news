@@ -1,4 +1,9 @@
-export default function DayNight({setIsDark,isDark}){
+import { useContext } from "react"
+import { ThemeContext } from "../contexts/ThemeContext"
+
+export default function DayNight(){
+
+    const {isDark,setIsDark} = useContext(ThemeContext)
 
     function switchTheme(){
         setIsDark((currTheme) => {
@@ -13,7 +18,7 @@ export default function DayNight({setIsDark,isDark}){
             {/* this hidden checkbox controls the state */}
             <input defaultChecked={isDark} checked={isDark} onClick={switchTheme} type="checkbox" />
             <svg
-                className="swap-on h-11 w-11 fill-current"
+                className="swap-on h-7 w-7 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24">
                 <path
@@ -22,7 +27,7 @@ export default function DayNight({setIsDark,isDark}){
 
             {/* moon icon */}
             <svg
-                className="swap-off h-11 w-11 fill-current"
+                className="swap-off h-6 w-6 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24">
                 <path

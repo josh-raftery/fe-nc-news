@@ -91,7 +91,7 @@ export default function SignUp() {
             onChange={handleChange}
             type="text"
             className="grow"
-            placeholder="profile picture url *"
+            placeholder="profile picture URL *"
             value={formData.avatar_url}
           />
         </label>

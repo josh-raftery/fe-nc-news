@@ -4,8 +4,9 @@ import Loading from "./Loading";
 import { UserContext } from "../contexts/User";
 import Delete from "./Delete";
 import Edit from "./Edit";
+import { ThemeContext } from "../contexts/ThemeContext";
 
-function Comments({ article_id, isDark }) {
+function Comments({ article_id}) {
 
   const [badComment,setBadComment] = useState(false)
   const [badPost, setBadPost] = useState(false)
@@ -15,6 +16,7 @@ function Comments({ article_id, isDark }) {
   const [didDeleteFail, setDidDeleteFail] = useState(false)
   const [deleteFailComment, setDeleteFailComment] = useState(0)
   const { user } = useContext(UserContext)
+  const {isDark} = useContext(ThemeContext)
 
   function handleChange(event){
     setComment(event.target.value)
@@ -79,8 +81,6 @@ function Comments({ article_id, isDark }) {
     )
   }
 
-  console.log(isDark, ' comments')
-
   return (
     <>
       <div style={{marginLeft: "1rem"}} className="post-comment">
@@ -109,11 +109,12 @@ function Comments({ article_id, isDark }) {
                   <div style={{marginBottom: "2rem"}}
                   className="card-body">
                       <p>{currentComment.body}</p>
-                      {currentComment.author === user.username &&  
+                      {user &&
+                      currentComment.author === user.username &&  
                         <div className="card-actions justify-end">
                           <div className="edit-delete">
-                            <button className="btn btn-ghost"><Edit isDark={isDark} /></button>
-                            <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-ghost"}><Delete isDark={isDark} /></button>
+                            <button className="btn btn-ghost"><Edit /></button>
+                            <button onClick={() => handleDeleteComment(currentComment,index)} className={didDeleteFail ? "btn btn-outline btn-error" : "btn btn-ghost"}><Delete /></button>
                           </div>
                             <div className="label">
                               <span className="label-text-alt">{deleteFailComment === currentComment.comment_id ? "Poor connection, try again later" : ""}</span>

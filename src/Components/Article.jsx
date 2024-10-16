@@ -10,8 +10,9 @@ import RelatedArticles from "./RelatedArticles";
 import Edit from "./Edit";
 import Delete from "./Delete";
 import { UserContext } from "../contexts/User";
+import { ThemeContext } from "../contexts/ThemeContext";
 
-function Article({isDark}) {
+function Article() {
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
   const [upvote, setUpvote] = useState(false)
@@ -25,6 +26,7 @@ function Article({isDark}) {
     height: window.innerHeight,
   });
   const { user } = useContext(UserContext)
+  const {isDark} = useContext(ThemeContext)
 
   const { article_id } = useParams();
   const { setError } = useContext(ErrorContext)
@@ -154,7 +156,7 @@ function Article({isDark}) {
 
   return (
     <>
-      <div className={windowDimensions.width >= 1037 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : (windowDimensions.width >= 768 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2" : "grid gap-[50px] grid-cols-1")}>
+      <div className={windowDimensions.width >= 1037 ? "article-cont grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : (windowDimensions.width >= 768 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2" : "grid gap-[50px] grid-cols-1")}>
         {windowDimensions.width >= 768 && <TopArticles/>}
         <div className="article">
           <div style={{paddingBottom: "3.5rem"}} className="card bg-base-100 w-96 shadow-xl">
@@ -187,15 +189,15 @@ function Article({isDark}) {
             {user &&
             user.username === article.author && 
             <div style={{ marginBottom: "2rem"}} className="edit-delete">
-              <button className = "btn btn-ghost"><Edit isDark={isDark} /></button>
-              <button onClick={() => handleDelete(article.article_id)} className="btn btn-ghost"><Delete isDark={isDark} /></button>
+              <button className = "btn btn-ghost"><Edit /></button>
+              <button onClick={() => handleDelete(article.article_id)} className="btn btn-ghost"><Delete /></button>
             </div>}
             
           </div>
         </div>
         {windowDimensions.width >= 1037 && <RelatedArticles topic={article.topic}/>}
       </div>
-      <Comments isDark={isDark} article_id={article.article_id} />
+      <Comments article_id={article.article_id} />
     </>
   );
 }

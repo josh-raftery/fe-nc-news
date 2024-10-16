@@ -6,28 +6,27 @@ import Topics from './Components/Topics';
 import Topic from './Components/Topic';
 import Nav from './Components/Nav';
 import Error from './Components/Error';
-import { useEffect, useState } from 'react';
 import PostArticle from './Components/PostArticle';
 import SignIn from './Components/SignIn';
 import SignUp from './Components/SignUp';
+import Profile from './Components/Profile';
 
 function App() {
 
-  const [isDark, setIsDark] = useState(JSON.parse(localStorage.getItem('theme')))
-
   return (
     <>
-      <Nav setIsDark={setIsDark} isDark={isDark} />
+      <Nav/>
       <Routes>
-        <Route path = "/" element = {<Home isDark={isDark}/>}/>
+        <Route path = "/" element = {<Home />}/>
         <Route path = "/topics" element = {<Topics/>}/>
-        <Route path = "/topics/:topic" element = {<Topic isDark={isDark}/>}/>
+        <Route path = "/topics/:topic" element = {<Topic />}/>
         <Route path = "/error" element = {<Error/>}/>
         <Route path = "/postArticle" element = {<PostArticle/>}/>
-        <Route path = "/:article_id" element = {<Article isDark={isDark} />}/>
+        <Route path = "/:article_id" element = {<Article />}/>
         <Route path = "*" element = {<Navigate to="/error"/>}/>
         <Route path = "/signin" element = {<SignIn/>}/>
         <Route path = "/signup" element = {<SignUp/>}/>
+        <Route path = "/profile" element = {<Profile/>}/>
       </Routes>
     </>
   )
