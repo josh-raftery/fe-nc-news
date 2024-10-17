@@ -27,6 +27,26 @@
     z-index: 30;
 }
 
+.close-modal{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+
+.redirect-container {
+    padding: 2rem;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    padding: 2rem !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    max-width: 400px !important;
+}
+
 .article-card{
     min-width: 380px;
     min-height: 380px;
@@ -94,6 +114,7 @@
     justify-content: right;
 }
 
+.redirect-container,
 .post-article-page,
 .article-info,
 .article-info p,

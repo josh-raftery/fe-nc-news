@@ -11,6 +11,7 @@ import Edit from "./Edit";
 import Delete from "./Delete";
 import { UserContext } from "../contexts/User";
 import { ThemeContext } from "../contexts/ThemeContext";
+import NoUserModal from "./NoUserModal";
 
 function Article() {
   const [article, setArticle] = useState({});
@@ -21,6 +22,7 @@ function Article() {
   const [hasUpVoted,setHasUpVoted] = useState(false)
   const [hasDownVoted,setHasDownVoted] = useState(false)
   const [parsedDate,setParsedDate] = useState("")
+  const [modal,setModal] = useState(false)
   const [windowDimensions, setWindowDimensions] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -75,68 +77,76 @@ function Article() {
   }
 
   function handleUpvote(){
-    let increment = 1
-
-    if(hasUpVoted){
-      setUpvote(false)
-      setHasUpVoted(false)
-      increment = -1
-    } else { 
-      setUpvote(true)
-      setHasUpVoted(true)
-    }
-    
-    if(downVote){
-      increment = 2
-      setDownvote(false)
-      setHasDownVoted(false)
-      setUpvote(true)
-    }
-
-    setVotes((currVotes) => {
-        return currVotes + increment
-    })
-
-    incArticleVotes(article.article_id,increment)
-    .catch(() => {
-        setVotes((currVotes) => {
-            return currVotes - 1
-        })
+    if(user){
+      let increment = 1
+  
+      if(hasUpVoted){
         setUpvote(false)
-    })
+        setHasUpVoted(false)
+        increment = -1
+      } else { 
+        setUpvote(true)
+        setHasUpVoted(true)
+      }
+      
+      if(downVote){
+        increment = 2
+        setDownvote(false)
+        setHasDownVoted(false)
+        setUpvote(true)
+      }
+  
+      setVotes((currVotes) => {
+          return currVotes + increment
+      })
+  
+      incArticleVotes(article.article_id,increment)
+      .catch(() => {
+          setVotes((currVotes) => {
+              return currVotes - 1
+          })
+          setUpvote(false)
+      })
+    } else {
+      setModal(true)
+    }
     
   }
 
   function handleDownvote(){
-    let increment = -1
-
-    if(hasDownVoted){
-      setDownvote(false)
-      setHasDownVoted(false)
-      increment = 1
-    } else{
-      setDownvote(true)
-      setHasDownVoted(true)
-    }
-
-    if(upvote){
-      increment = -2
-      setUpvote(false)
-      setHasUpVoted(false)
-      setDownvote(true)
-    }
-
-    setVotes((currVotes) => {
-      return currVotes + increment
-    })
-
-    incArticleVotes(article.article_id,increment)
-    .catch(() => {
-        setVotes((currVotes) => {
-            return currVotes + 1
-        })
+    if(user){
+      let increment = -1
+  
+      if(hasDownVoted){
         setDownvote(false)
-    })
+        setHasDownVoted(false)
+        increment = 1
+      } else{
+        setDownvote(true)
+        setHasDownVoted(true)
+      }
+  
+      if(upvote){
+        increment = -2
+        setUpvote(false)
+        setHasUpVoted(false)
+        setDownvote(true)
+      }
+  
+      setVotes((currVotes) => {
+        return currVotes + increment
+      })
+  
+      incArticleVotes(article.article_id,increment)
+      .catch(() => {
+          setVotes((currVotes) => {
+              return currVotes + 1
+          })
+          setDownvote(false)
+      })
+    }else {
+      setModal(true)
+    }
   }
 
   function handleDelete(article_id){
@@ -152,6 +162,7 @@ function Article() {
 
   return (
     <>
+      {modal && <NoUserModal setModal={setModal}/>}
       <div className={windowDimensions.width >= 1037 ? "article-cont grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : (windowDimensions.width >= 768 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2" : "grid gap-[50px] grid-cols-1")}>
         {windowDimensions.width >= 768 && <TopArticles/>}
         <div className="article">

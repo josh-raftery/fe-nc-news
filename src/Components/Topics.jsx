@@ -18,7 +18,7 @@ function Topics(){
              <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {topics.map((topic) => {
                     return (
-                        <Link key={topic.slug} to = {`/topics/${topic.slug}`}>
+                        <Link key={topic.slug} to = {`/?topic=${topic.slug}`}>
                             <div className="card bg-base-100 w-96 shadow-xl">
                                 <div className="card-body">
                                     <h2 className="card-title">{topic.slug}</h2>

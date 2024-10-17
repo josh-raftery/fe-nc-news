@@ -5,6 +5,7 @@ import { UserContext } from "../contexts/User";
 import Delete from "./Delete";
 import Edit from "./Edit";
 import { ThemeContext } from "../contexts/ThemeContext";
+import NoUserModal from "./NoUserModal";
 
 function Comments({ article_id}) {
 
@@ -17,6 +18,7 @@ function Comments({ article_id}) {
   const [deleteFailComment, setDeleteFailComment] = useState(0)
   const { user } = useContext(UserContext)
   const {isDark} = useContext(ThemeContext)
+  const [modal, setModal] = useState(false)
 
   function handleChange(event){
     setComment(event.target.value)
@@ -27,16 +29,20 @@ function Comments({ article_id}) {
     if(!comment){
       setBadComment(true)
     } else{
-      setBadComment(false)
-      return postComment(article_id,user.username,comment)
-      .then((newComment) => {
-        setComments((currComments) => [newComment, ...currComments])
-        setBadPost(false)
-        setComment("")
-      })
-      .catch((err) => {
-        setBadPost(true)
-      })
+      if(!user){
+        setModal(true)
+      }else{
+        setBadComment(false)
+        return postComment(article_id,user.username,comment)
+        .then((newComment) => {
+          setComments((currComments) => [newComment, ...currComments])
+          setBadPost(false)
+          setComment("")
+        })
+        .catch((err) => {
+          setBadPost(true)
+        })
+      }
     }
   }
 
@@ -83,6 +89,7 @@ function Comments({ article_id}) {
 
   return (
     <>
+    {modal && <NoUserModal setModal={setModal} />}
       <div style={{marginLeft: "1rem"}} className="post-comment">
         <label className="form-control w-full max-w-xs">
           <input

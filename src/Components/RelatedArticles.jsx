@@ -9,12 +9,13 @@ function RelatedArticles({topic}){
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(() => {
+        setIsLoading(true)
         getArticles({topic, limit: 5})
         .then((articles) => {
             setArticles(articles)
             setIsLoading(false)
         })
-    }, [])
+    }, [topic])
 
     if(isLoading){
         return <Loading/>

@@ -19,7 +19,6 @@ function Articles() {
   const [titleInput, setTitleInput] = useState("")
   const [search,setSearch] = useState("")
   const [isLoading, setisLoading] = useState(true)
-  const [clearSearch,setClearSearch] = useState(false)
   const [noResults, setNoResults] = useState(false)
   const [checkbox, setCheckBox] = useState({
     topic: "",
@@ -43,7 +42,6 @@ function Articles() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const newCheckbox = { ...checkbox };
-    //let newSearch = ""
 
     if (params.get("topic")) newCheckbox.topic = params.get("topic");
     if (params.get("sort_by")) newCheckbox.sort_by = params.get("sort_by");
@@ -53,12 +51,13 @@ function Articles() {
     //   params.delete('title')
     //   setSearch("")
     // }
-    console.log('test')
 
     if(params.get("title")){
       setSearch(params.get("title"))
     }
-
+    
+    setCheckBox(newCheckbox);
+    
     if(params.get("clear")){
       setSearch("")
       setPage(1)
@@ -66,7 +65,20 @@ function Articles() {
       setMaxPages(false)
     }
 
-    setCheckBox(newCheckbox);
+    if(params.get("reset")){
+      setSearch("")
+      setCheckBox({
+        topic: "",
+        sort_by: "",
+        order: ""
+      })
+      setTitle("")
+      setTitleInput("")
+      setPage(1)
+      setPagination(false)
+      setMaxPages(false)
+    }
+
   }, [location.search]);
 
   useEffect(() => {
@@ -109,7 +121,7 @@ function Articles() {
           });
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setisLoading(false)
         if(search){
           setNoResults(true)

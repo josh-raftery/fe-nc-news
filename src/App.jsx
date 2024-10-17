@@ -3,7 +3,6 @@ import Article from './Components/Article';
 import Home from './Components/Home'
 import { Routes, Route, Navigate } from "react-router-dom";
 import Topics from './Components/Topics';
-import Topic from './Components/Topic';
 import Nav from './Components/Nav';
 import Error from './Components/Error';
 import PostArticle from './Components/PostArticle';
@@ -19,7 +18,6 @@ function App() {
       <Routes>
         <Route path = "/" element = {<Home />}/>
         <Route path = "/topics" element = {<Topics/>}/>
-        <Route path = "/topics/:topic" element = {<Topic />}/>
         <Route path = "/error" element = {<Error/>}/>
         <Route path = "/postArticle" element = {<PostArticle/>}/>
         <Route path = "/:article_id" element = {<Article />}/>
