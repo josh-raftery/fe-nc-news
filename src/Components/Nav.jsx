@@ -118,7 +118,7 @@ function Nav() {
           <div onClick={handleReset} className="btn btn-ghost text-xl">
             <img
               className="home-btn"
-              style={{ width: "40px" }}
+              style={{ width: "30px" }}
               src={isDark ? "/assets/home-night.png" : "/assets/home.png"}
             />
           </div>
