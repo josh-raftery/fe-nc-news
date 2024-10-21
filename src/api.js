@@ -31,6 +31,10 @@ function incArticleVotes(article_id, inc_votes) {
   return api.patch(`/articles/${article_id}`, { inc_votes });
 }
 
+function incCommentVotes(comment_id, inc_votes) {
+  return api.patch(`/comments/${comment_id}`, { inc_votes });
+}
+
 function postComment(article_id, username, comment) {
   return api.post(`/articles/${article_id}/comments`, {
       body: comment,
@@ -88,5 +92,6 @@ export {
   getUser,
   postArticle,
   deleteArticle,
-  postUser
+  postUser,
+  incCommentVotes
 };

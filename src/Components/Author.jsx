@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getUser } from "../api"
 
-function Author({author}){
+function Author({author,windowWidth}){
 
     const [articleAuthor, setArticleAuthor] = useState({})
 
@@ -13,18 +13,9 @@ function Author({author}){
     })
 
     return(
-        <div className="author-div">
-            <div className="avatar">
-                <div className="w-12 rounded-full">
-                    <img src={articleAuthor.avatar_url} />
-                </div>
-                <h1 style=
-                {{
-                    marginTop: "0.7rem",
-                    marginLeft: "1rem"
-                }}
-                >Written by: {articleAuthor.username}</h1>
-            </div>
+        <div className="author-div flex-shrink-0  gap-3">
+            <img className="author-img" src={articleAuthor.avatar_url} />
+            {windowWidth > 400 && <p className="mt-4" >by <b>{articleAuthor.username}</b></p>}
         </div>
     )
 }

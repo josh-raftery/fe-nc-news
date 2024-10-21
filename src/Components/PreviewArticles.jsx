@@ -1,26 +1,16 @@
-import { useState } from "react"
 import { Link } from "react-router-dom"
 
 function PreviewArticles({articles, title}){
 
     return (
-        <div className="preview">
-            <div className="card bg-base-70 w-65 shadow-xl">
-            <div className="card-body">
-                <h2 style={{
-                    fontSize: "40px",
-                    justifyContent: "center"
-                }} 
-                className="card-title">{title}</h2>
-            </div>
-        </div>
+        <div className="pt-2 pr-4 pb-2">
+            <h2>{title}</h2>
             {articles.map((article) => {
                 return (
                     <Link key={article.article_id} to = {`/${article.article_id}`}>
-                        <div className="card bg-base-70 w-65 shadow-xl">
-                            <div className="card-body">
-                                <h3 className="card-title">{article.title}</h3>
-                            </div>
+                        <div className="" >
+                            <img src={article.article_img_url} ></img>
+                            <h2>{article.title}</h2>
                         </div>
                     </Link>
                 )
