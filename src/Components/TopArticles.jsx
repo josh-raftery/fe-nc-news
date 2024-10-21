@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { getArticles } from "../api"
-import { Link } from "react-router-dom"
 import PreviewArticles from "./PreviewArticles"
 import Loading from "./Loading"
 
@@ -15,6 +14,7 @@ function TopArticles(){
             limit: 5
         })
         .then((articles) => {
+            console.log(articles, 'top articles')
             setArticles(articles)
             setIsLoading(false)
         })
@@ -24,7 +24,7 @@ function TopArticles(){
         return <Loading/>
     }
 
-    return <PreviewArticles articles={articles} title="Top Stories" />
+    return <PreviewArticles key="Top-Articles" articles={articles} title="Top Stories" />
 }
 
 export default TopArticles

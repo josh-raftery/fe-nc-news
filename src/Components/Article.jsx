@@ -156,8 +156,6 @@ function Article() {
 
   // width 1037 grid 3 cols "grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
 
-  console.log(article);
-
   return (
     <div className="article-page flex justify-between" >
       {/* <div className={windowDimensions.width >= 1037 ? "article-cont grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : (windowDimensions.width >= 768 ? "grid gap-[50px] grid-cols-1 md:grid-cols-2" : "grid gap-[50px] grid-cols-1")}>
@@ -291,7 +289,12 @@ function Article() {
         </article>
         <Comments article_id={article.article_id} />
       </div>
-      {windowDimensions.width >= 1037 && <RelatedArticles topic={article.topic}/>}
+      {windowDimensions.width >= 1037 && 
+      <div>
+        <RelatedArticles key="related" topic={article.topic}/>
+        <TopArticles key="top" />
+      </div>
+      }
     </div>
   );
 }

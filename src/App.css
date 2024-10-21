@@ -6,6 +6,10 @@
     justify-content: center;
 }
 
+.preview-article-img{
+    width: 150px;
+}
+
 .filter-sidebar {
     position: fixed;
     top: 0;
@@ -193,6 +197,10 @@
 .indv-article,
 .comment-input{
     width: calc(100vw * 0.75) !important;
+}
+
+.article-sidebar{
+    width: calc(100vw * 0.23) !important;
 }
 
 .left-side-nav{

@@ -9,8 +9,9 @@ function RelatedArticles({topic}){
 
     useEffect(() => {
         setIsLoading(true)
-        getArticles({topic, limit: 10})
+        getArticles({topic, limit: 5})
         .then((articles) => {
+            console.log(articles, 'related articles')
             setArticles(articles)
             setIsLoading(false)
         })
@@ -20,7 +21,7 @@ function RelatedArticles({topic}){
         return <Loading/>
     }
 
-    return <PreviewArticles articles={articles} title="Related Articles"/>
+    return <PreviewArticles key="preview-articles" articles={articles} title="Related Articles"/>
 }
 
 export default RelatedArticles

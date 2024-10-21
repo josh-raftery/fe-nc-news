@@ -270,9 +270,9 @@ function Comments({ article_id }) {
               src={user ? user.avatar_url : isDark ? "/assets/profile-night.png" : "/assets/profile.png"}
             />
         </section>
-        <section style={{width: "200px"}} className="make-comment relative " >
+        <section style={{width: "200px"}} className="make-comment relative mr-20" >
             <input
-              className ={isDark ? "post-comment-night bg-base-100 !w-[calc(100vw*0.8-110px)] mr-2" : "post-comment bg-base-100 !w-[calc(100vw*0.8-110px)]"}
+              className ={isDark ? "post-comment-night bg-base-100 !w-[calc((100vw*0.75)-110px)]" : "post-comment bg-base-100 !w-[calc(100vw*0.75) - 110px)] mr-2"}
               placeholder={badComment ? "Comment empty" : "Add a comment..."}
               onChange={handleChange}
               value={comment}
