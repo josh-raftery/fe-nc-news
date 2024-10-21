@@ -12,7 +12,7 @@ function Nav() {
 
   const { user, setUser } = useContext(UserContext);
   const { isDark, setIsDark } = useContext(ThemeContext);
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
 
   const [search, setSearch] = useState("");
 
@@ -48,42 +48,48 @@ function Nav() {
   }
 
   function handleClear() {
-    setSearch("")
+    setSearch("");
     navigate(`/?clear=true`);
   }
 
-  function handleReset(){
-    navigate('/?reset=true')
+  function handleReset() {
+    navigate("/?reset=true");
   }
 
-  function handlePostClick(){
-    if(user){
-      navigate('/postArticle')
+  function handlePostClick() {
+    if (user) {
+      navigate("/postArticle");
     } else {
-      setModal(true)
+      setModal(true);
     }
   }
- 
+
   return (
     <>
       {modal && <NoUserModal setModal={setModal} />}
       <div
-        style={{ marginBottom: "0.3rem" }} 
-        className="navbar bg-base-100 flex items-center justify-between p-4"
+        style={{ marginBottom: "0.3rem" }}
+        className="navbar bg-base-100 flex justify-between"
       >
         <div className="left-side-nav">
           <div className="dropdown dropdown-bottom">
-            <div tabIndex={0} role="button" className="btn btn-ghost m-1">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-sm h-10"
+            >
               <img
                 style={{ width: "20px" }}
                 src={
-                  isDark ? "/assets/hamburger-night.png" : "/assets/hamburger.png"
+                  isDark
+                    ? "/assets/hamburger-night.png"
+                    : "/assets/hamburger.png"
                 }
               />
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 shadow"
             >
               <Link to="topics">
                 <li>
@@ -91,14 +97,16 @@ function Nav() {
                     <img
                       style={{ marginLeft: "0.4rem", width: "20px" }}
                       src={
-                        isDark ? "/assets/topics-night.png" : "/assets/topics.png"
+                        isDark
+                          ? "/assets/topics-night.png"
+                          : "/assets/topics.png"
                       }
                     />{" "}
                     Browse Topics
                   </a>
                 </li>
               </Link>
-              <li onClick={handlePostClick} >
+              <li onClick={handlePostClick}>
                 <a>
                   <img
                     style={{ marginLeft: "0.2rem", width: "25px" }}
@@ -115,7 +123,10 @@ function Nav() {
               </li>
             </ul>
           </div>
-          <div onClick={handleReset} className="btn btn-ghost text-xl">
+          <div
+            onClick={handleReset}
+            className="home-button btn btn-ghost btn-sm h-10 text-xl"
+          >
             <img
               className="home-btn"
               style={{ width: "30px" }}
@@ -123,47 +134,52 @@ function Nav() {
             />
           </div>
         </div>
-        <div className="flex items-center">
-          <div className="search-bar gap-0.5">
-            <label className="input input-bordered flex items-center h-10">
+        <div className="search-div flex items-center w-full">
+          <div className="search-bar w-full">
+            <label className="input input-bordered flex items-center h-10 w-full">
               <input
                 type="text"
-                className="w-full h-10 sm:w-64 md:w-96 lg:max-w-xl"
+                className="w-full h-10"
                 placeholder="Search"
                 onChange={handleChange}
                 onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
                 value={search}
+                style={{ minWidth: "0"}} // Ensures no min-width is set
               />
               <svg
                 onClick={handleClear}
                 fill="currentColor"
                 viewBox="0 0 10 10"
-                width="0.75em"
-                height="0.75em"
+                width="1em"
+                height="1em"
                 stroke="currentColor"
-                stroke-width="2"
-                className="clear-search opacity-70"
+                strokeWidth="2"
+                className="clear-search-nav clear-search opacity-70"
               >
                 <line x1="1" y1="1" x2="9" y2="9" />
                 <line x1="9" y1="1" x2="1" y2="9" />
               </svg>
-            </label>
-            <button onClick={handleSubmit} className="btn btn-active btn-sm h-10">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="h-4 w-4 opacity-70"
+              <button
+                onClick={handleSubmit}
+                className="search-button btn btn-active btn-sm h-9 w-9"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  className="search-svg opacity-70"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </label>
           </div>
         </div>
+
         <div className="flex items-center space-x-4">
           <div className="dropdown dropdown-end">
             <div
@@ -172,11 +188,14 @@ function Nav() {
               className="btn btn-sm btn-ghost btn-circle avatar"
             >
               <img
-                style={{ objectFit: "scale-down"}}
+                style={{ objectFit: "scale-down" }}
                 alt="Tailwind CSS Navbar component"
-                src={user ? 
-                  user.avatar_url : 
-                  isDark ? "/assets/profile-night.png" : "/assets/profile.png"
+                src={
+                  user
+                    ? user.avatar_url
+                    : isDark
+                    ? "/assets/profile-night.png"
+                    : "/assets/profile.png"
                 }
               />
             </div>

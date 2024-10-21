@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { getArticles } from "../api"
-import { Link } from "react-router-dom"
 import PreviewArticles from "./PreviewArticles"
 import Loading from "./Loading"
 
@@ -10,7 +9,7 @@ function RelatedArticles({topic}){
 
     useEffect(() => {
         setIsLoading(true)
-        getArticles({topic, limit: 5})
+        getArticles({topic, limit: 10})
         .then((articles) => {
             setArticles(articles)
             setIsLoading(false)

@@ -47,11 +47,6 @@ function Articles() {
     if (params.get("sort_by")) newCheckbox.sort_by = params.get("sort_by");
     if (params.get("order")) newCheckbox.order = params.get("order");
 
-    // if(!params.get("title") && search) {
-    //   params.delete('title')
-    //   setSearch("")
-    // }
-
     if(params.get("title")){
       setSearch(params.get("title"))
     }
@@ -102,16 +97,6 @@ function Articles() {
       .then((articles) => {
         setNoResults(false)
         setisLoading(false)
-        setTitle(() => {
-          let titleArr = []
-          if(checkbox.topic){
-            titleArr.push(`${checkbox.topic[0].toUpperCase()}${checkbox.topic.slice(1)}`) 
-          } 
-          if(titleInput){
-            titleArr.push(titleInput)
-          }
-          return titleArr.join(' · ')
-        })
         setTotalCount(articles[0].total_count);
         if (!pagination) {
           setArticles(articles);
@@ -140,6 +125,17 @@ function Articles() {
     if (checkbox.sort_by) params.set("sort_by", checkbox.sort_by);
     if (checkbox.order) params.set("order", checkbox.order);
     if (search) params.set("title", search)
+
+    setTitle(() => {
+      let titleArr = []
+      if(checkbox.topic){
+        titleArr.push(`${checkbox.topic[0].toUpperCase()}${checkbox.topic.slice(1)}`) 
+      } 
+      if(titleInput){
+        titleArr.push(titleInput)
+      }
+      return titleArr.join(' · ')
+    })
 
     navigate({
       pathname: "/",

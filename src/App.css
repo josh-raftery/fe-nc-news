@@ -1,3 +1,4 @@
+.votes-btn-comment,
 .post-article-container,
 .article{
     display: flex;
@@ -17,6 +18,15 @@
 
 }
 
+.profile-section{
+    width: 50px !important;
+}
+
+.make-comment,
+.comment-section{
+    margin-left: 50px;
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -27,6 +37,12 @@
     z-index: 30;
 }
 
+.close-share{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .close-modal{
     position: absolute;
     top: 0;
@@ -35,6 +51,7 @@
     margin-right: 1rem;
 }
 
+.share-container,
 .redirect-container {
     padding: 2rem;
     position: fixed !important;
@@ -55,6 +72,9 @@
 }
 
 /* Content below the navbar, with no overlap */
+
+
+.article-page,
 .error,
 .post-article-page,
 .signin,
@@ -85,8 +105,53 @@
     cursor: pointer;
 }
 
+.clear-search-nav{
+    position: relative;
+    right: -7px;
+}
+
+.user-profile-picture {
+    position: relative;
+    top: 0;
+    left: 50%;
+    min-width: 40px;
+    max-width: 45px;
+    min-height: 40px;
+    max-height: 45px;
+    border-radius: 50%;
+}
+
+.author-img{
+    min-width: 50px;
+    max-width: 60px;
+    min-height: 50px;
+    max-height: 60px;
+    border-radius: 50%;
+}
+
+.indivdual-article{
+    max-width: 700px;
+}
+
+.home-button{
+    padding-left: 0.3rem !important;
+    padding-right: 0.3rem !important;
+}
+
+.search-button{
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    position: relative;
+    right: -15px;
+}
+
 .clear-search:hover{
     opacity: 100;
+}
+
+.search-svg{
+    width: max-content;
+    height: max-content;
 }
 
 .filter-sidebar-buttons{
@@ -96,14 +161,51 @@
 
 }
 
+.post-comment-buttons{
+    gap: 1rem;
+    margin-top: 0.3rem;
+    position: absolute;
+    right: 0;
+    display: flex;
+    width: max-content;
+    margin-right: 3rem;
+}
+
+/* .comment-buttons{
+    position: relative;
+    right: 0;
+} */
+
+.divider-line{
+    border-bottom: solid black;
+}
+
+
+.author-div,
+.individual-article-info,
+.post-comment-buttons,
+.comment-input,
+.comment{
+    display: flex;
+}
+
+.make-comment,
+.indv-article,
+.comment-input{
+    width: calc(100vw * 0.75) !important;
+}
+
 .left-side-nav{
-    min-width: 135px;
+    min-width: 85px;
+}
+
+.search-div{
+    max-width: 700px;
 }
 
 .search-bar{
-    display: flex;
-    justify-content: space-between;
-
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .filter-container{
@@ -119,7 +221,6 @@
 .article-info,
 .article-info p,
 .more-pages,
-.author-div,
 .sort-order-div,
 .articles-div,
 .error{
@@ -151,6 +252,25 @@
     margin-top: 1rem;
 }
 
+.vote-btn {
+    height: 32px  !important;
+    width: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.votes-btn-comment{
+    position: relative;
+    left: -8px;
+    display: flex;
+    width: max-content
+}
+
+.date-username{
+    display: flex;
+    gap: 0.5rem;
+}
+
 .home-btn,
 .topics-button,
 .post-article-button,
@@ -158,27 +278,38 @@
     width: 40px;
 }
 
-.topics,
-.post-comment{
+.post-comment {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid grey;
+    outline: none;
+}
+
+.post-comment-night {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid grey;
+    outline: none;
+}
+
+.post-comment:focus {
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+}
+
+.post-comment-night:focus {
+    border: none;
+    border-bottom: 2px solid white;
+    outline: none;
+}
+
+.topics{
     display: flex;
     justify-content: center;
     margin-top: 2rem;
 }
 
-.btn{
-    margin-right: 1rem;
-}
-
-.author-div{
-    margin-top: 1rem
-}
-
-.badge{
-    margin-right: 1rem;
-    margin-top: 1rem;
-}
-
-.author-div,
 .dropdown ul li{
     cursor: pointer;
 }
