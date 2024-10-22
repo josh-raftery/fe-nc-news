@@ -3,7 +3,7 @@ import { getArticles } from "../api"
 import PreviewArticles from "./PreviewArticles"
 import Loading from "./Loading"
 
-function TopArticles(){
+function TopArticles({windowSize}){
     const [articles, setArticles] = useState([])
     const [isLoading,setIsLoading] = useState(true)
 
@@ -14,7 +14,6 @@ function TopArticles(){
             limit: 5
         })
         .then((articles) => {
-            console.log(articles, 'top articles')
             setArticles(articles)
             setIsLoading(false)
         })
@@ -24,7 +23,7 @@ function TopArticles(){
         return <Loading/>
     }
 
-    return <PreviewArticles key="Top-Articles" articles={articles} title="Top Stories" />
+    return <PreviewArticles key="Top-Articles" articles={articles} title="Top Stories" windowSize={windowSize}/>
 }
 
 export default TopArticles

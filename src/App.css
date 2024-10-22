@@ -193,6 +193,7 @@
     display: flex;
 }
 
+.comment,
 .make-comment,
 .indv-article,
 .comment-input{

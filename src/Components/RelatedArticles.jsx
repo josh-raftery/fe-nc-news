@@ -3,9 +3,10 @@ import { getArticles } from "../api"
 import PreviewArticles from "./PreviewArticles"
 import Loading from "./Loading"
 
-function RelatedArticles({topic}){
+function RelatedArticles({topic, windowSize}){
     const [articles, setArticles] = useState([])
     const [isLoading,setIsLoading] = useState(true)
+    
 
     useEffect(() => {
         setIsLoading(true)
@@ -21,7 +22,7 @@ function RelatedArticles({topic}){
         return <Loading/>
     }
 
-    return <PreviewArticles key="preview-articles" articles={articles} title="Related Articles"/>
+    return <PreviewArticles key="preview-articles" articles={articles} title="Related Articles" windowSize={windowSize}/>
 }
 
 export default RelatedArticles
