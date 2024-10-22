@@ -14,8 +14,9 @@ function Author({author,windowWidth}){
 
     return(
         <div className="author-div flex-shrink-0  gap-3">
-            <img className="author-img" src={articleAuthor.avatar_url} />
-            {windowWidth > 400 && <p className="mt-4" >by <b>{articleAuthor.username}</b></p>}
+            
+            {windowWidth > 400 && <img className="author-img" src={articleAuthor.avatar_url} />}
+            <p className="mt-4" >by <b>{articleAuthor.username}</b></p>
         </div>
     )
 }

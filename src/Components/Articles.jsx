@@ -141,7 +141,7 @@ function Articles() {
       pathname: "/",
       search: params.toString(),
     });
-  }, [checkbox, navigate, search]);
+  }, [checkbox, navigate, search]); // TO DO 
 
   function newPage() {
     setPagination(true);
@@ -177,7 +177,7 @@ function Articles() {
   }
 
   return (
-    <div className="articles-container" style={{ marginTop: "88px", marginLeft: "1rem" }}>
+    <div className="articles-container" style={{ marginTop: "152px", marginLeft: "1rem" }}>
       {showFilters && (
         <>
           <Filters
@@ -193,7 +193,7 @@ function Articles() {
           <Opaque />
         </>
       )}
-      <div className="filter-container flex justify-between items-center">
+      <div className="filter-container bg-base-100  flex justify-between items-center pb-4">
         <h2 style={{marginLeft: "7%"}} className="card-title">{title}</h2>
         <button
           onClick={() => setShowFilters(true)}
