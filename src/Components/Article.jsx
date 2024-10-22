@@ -211,10 +211,10 @@ function Article() {
           <div className="individual-article-info flex justify-between gap-5 mt-2">
             <div className="article-date-author flex gap-5 m-2">
               <Author windowWidth={windowDimensions.width} author={article.author} />
-              <p className="mt-4">
+            </div>
+            <p className="mt-6">
                 {windowDimensions.width > 520 && <em style={{ fontSize: "90%" }}>{`  ${parsedDate}`}</em>}
               </p>
-            </div>
             <div className="flex items-center gap-3 mt-1 border-1">
               <div
                 className={`votes-btn-comment gap-2 h-[40px]`}
@@ -291,8 +291,8 @@ function Article() {
       </div>
       {windowDimensions.width >= 1037 && 
       <div>
-        <RelatedArticles key="related" topic={article.topic}/>
-        <TopArticles key="top" />
+        <RelatedArticles key="related" topic={article.topic} windowSize={windowDimensions.width}/>
+        <TopArticles key="top" windowSize={windowDimensions.width}/>
       </div>
       }
     </div>

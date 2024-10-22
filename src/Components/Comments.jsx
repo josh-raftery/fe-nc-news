@@ -263,16 +263,16 @@ function Comments({ article_id }) {
   return (
     <div style={{ marginBottom: "1rem", marginRight: "3rem" }}>
       {modal && <NoUserModal setModal={setModal} />}
-      <div style={{marginTop: "3rem", marginBottom: "2rem"}} className="comment-input" >
+      <div style={{marginTop: "3rem", marginBottom: "2rem"}} className="comment-input pr-5" >
         <section className="profile-section">
             <img
               className="user-profile-picture"
               src={user ? user.avatar_url : isDark ? "/assets/profile-night.png" : "/assets/profile.png"}
             />
         </section>
-        <section style={{width: "200px"}} className="make-comment relative mr-20" >
+        <section style={{width: "200px"}} className="make-comment relative" >
             <input
-              className ={isDark ? "post-comment-night bg-base-100 !w-[calc((100vw*0.75)-110px)]" : "post-comment bg-base-100 !w-[calc(100vw*0.75) - 110px)] mr-2"}
+              className ={isDark ? "post-comment-night bg-base-100 " : "post-comment bg-base-100"}
               placeholder={badComment ? "Comment empty" : "Add a comment..."}
               onChange={handleChange}
               value={comment}
@@ -286,7 +286,7 @@ function Comments({ article_id }) {
       </div>
       {comments.map((comment, index) => {
         return (
-          <div className="comment">
+          <div className="comment pr-5">
             <section className="profile-section">
               <img
                 className="user-profile-picture"
