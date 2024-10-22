@@ -201,8 +201,8 @@ function Article() {
       
       {modal && <NoUserModal setModal={setModal} />}
       {share && <Share setShare={setShare} />}
-      <div className="indv-article">
-        <article style={{margin: "0 auto"}} className="indivdual-article m-3">
+      <div className={windowDimensions.width > 1037 ? "indv-article" : "indv-article-full"}>
+        <article style={{margin: "0 auto"}} className={`indivdual-article m-3 ${windowDimensions.width < 1037 && 'pr-4 pl-4'}`}>
           <h2 style={{ fontSize: "30px" }}>
             <b>{article.title}</b>
           </h2>
@@ -213,7 +213,7 @@ function Article() {
               <Author windowWidth={windowDimensions.width} author={article.author} />
             </div>
             <p className="mt-6">
-                {windowDimensions.width > 520 && <em style={{ fontSize: "90%" }}>{`  ${parsedDate}`}</em>}
+                {windowDimensions.width > 570 && <em style={{ fontSize: "90%" }}>{`  ${parsedDate}`}</em>}
               </p>
             <div className="flex items-center gap-3 mt-1 border-1">
               <div
@@ -287,7 +287,7 @@ function Article() {
             </div>
           </div>
         </article>
-        <Comments article_id={article.article_id} />
+        <Comments article_id={article.article_id} windowSize={windowDimensions.width} />
       </div>
       {windowDimensions.width >= 1037 && 
       <div>

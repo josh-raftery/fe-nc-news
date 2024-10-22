@@ -5,21 +5,13 @@ import { getUser } from "../api";
 
 function PreviewArticles({ articles, title, windowSize }) {
   const { isDark } = useContext(ThemeContext);
-  const [profilePictures,setProfilePictures] = useState([])
   const [parsedDates, setParsedDates] = useState([])
 
   useEffect(() => {
-    const userPromises = articles.map((article) => {
-        return getUser(article.author)
-    })
-    Promise.all(userPromises)
-    .then((users) => {
-        setProfilePictures(users.map((user) => user.avatar_url))
-        setParsedDates(articles.map((article) => {
-            const date = article.created_at.split("T");
-            return (date[0]);
-        }))
-    })
+    setParsedDates(articles.map((article) => {
+      const date = article.created_at.split("T");
+      return (date[0]);
+  }))
   },[])
 
   console.log(title);
@@ -57,10 +49,6 @@ function PreviewArticles({ articles, title, windowSize }) {
                 </h2>
                 <div class="flex justify-between flex-wrap left-0 right-0 bottom-0 absolute mb-5">
                   <div className="flex gap-1">
-                    <img
-                      style={{ maxWidth: "25px", maxHeight: "25px" }}
-                      src={profilePictures[index]}
-                    ></img>
                     <p
                       style={{
                         fontSize: "60%",

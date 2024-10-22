@@ -13,7 +13,7 @@ import Edit from "./Edit";
 import { ThemeContext } from "../contexts/ThemeContext";
 import NoUserModal from "./NoUserModal";
 
-function Comments({ article_id }) {
+function Comments({ article_id,windowSize }) {
   const [badComment, setBadComment] = useState(false);
   const [badPost, setBadPost] = useState(false);
   const [comment, setComment] = useState("");
@@ -263,14 +263,14 @@ function Comments({ article_id }) {
   return (
     <div style={{ marginBottom: "1rem", marginRight: "3rem" }}>
       {modal && <NoUserModal setModal={setModal} />}
-      <div style={{marginTop: "3rem", marginBottom: "2rem"}} className="comment-input pr-5" >
+      <div style={{marginTop: "3rem", marginBottom: "2rem"}} className={`${windowSize > 1037 ? 'comment-input' : 'comment-input-full'} w-full pr-5`} >
         <section className="profile-section">
             <img
               className="user-profile-picture"
               src={user ? user.avatar_url : isDark ? "/assets/profile-night.png" : "/assets/profile.png"}
             />
         </section>
-        <section style={{width: "200px"}} className="make-comment relative" >
+        <section style={{width: "200px"}} className={`${windowSize > 1037 ? 'make-comment' : 'make-comment-full'} relative w-full`} >
             <input
               className ={isDark ? "post-comment-night bg-base-100 " : "post-comment bg-base-100"}
               placeholder={badComment ? "Comment empty" : "Add a comment..."}
@@ -286,7 +286,7 @@ function Comments({ article_id }) {
       </div>
       {comments.map((comment, index) => {
         return (
-          <div className="comment pr-5">
+          <div className={`${windowSize > 1037 ? 'comment' : 'comment-full'} pr-5`}>
             <section className="profile-section">
               <img
                 className="user-profile-picture"

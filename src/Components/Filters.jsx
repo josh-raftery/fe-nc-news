@@ -29,22 +29,28 @@ function clearAll(){
   }
 
   function handleChange(input){
-    setCheckBoxInput((currInput) => {
-      let output = {...currInput}
+    setCheckBoxInput((currCheckbox) => {
+      let newCheckbox = {...currCheckbox}
+      let exact = true
       for(let key in input){
         let value = input[key]
-        if(output[key] === value){
-          output[key] = ''
-        } else {
-          output[key] = value
+        if(newCheckbox[key] != value){
+          exact = false
+          newCheckbox[key] = value
         }
       }
-      return output
+      if(exact){
+        newCheckbox[key] = ''
+      }
+      return newCheckbox
     })
   }
 
   function handleSubmit(){
     let empty = true
+    if(!checkboxInput.sort_by && !checkboxInput.order){
+      setTitleInput("")
+    }
     for(let key in checkboxInput){
       if(checkboxInput[key]){
         empty = false
@@ -74,7 +80,7 @@ function clearAll(){
               width="1.5em"
               height="1.5em"
               stroke="currentColor"
-              stroke-width="2"
+              strokeWidth="2"
               className="clear-search opacity-80"
             >
               <line x1="1" y1="1" x2="9" y2="9" />

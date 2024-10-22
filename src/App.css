@@ -10,6 +10,20 @@
     width: 150px;
 }
 
+.filter-container{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-top: 88px;
+    z-index: 30;
+    width: 100vw;
+}
+
+.filter-button{
+    margin-right: 5%;
+}
+
 .filter-sidebar {
     position: fixed;
     top: 0;
@@ -26,6 +40,7 @@
     width: 50px !important;
 }
 
+.make-comment-full,
 .make-comment,
 .comment-section{
     margin-left: 50px;
@@ -188,10 +203,26 @@
 .author-div,
 .individual-article-info,
 .post-comment-buttons,
+.comment-input-full,
 .comment-input,
+.comment-full,
 .comment{
     display: flex;
 }
+
+.comment-full,
+.make-comment-full,
+.comment-input-full,
+.indv-article-full{
+    width: 100vw !important;
+}
+
+.make-comment-full,
+.comment-input-full,
+.comment-full{
+    margin-right: 2rem;
+}
+
 
 .comment,
 .make-comment,
