@@ -1,10 +1,6 @@
-import { useContext } from "react"
-import { ThemeContext } from "../contexts/ThemeContext"
-
 function Edit(){
-    const {isDark} = useContext(ThemeContext)
 
-    return <img style={{width: "30px"}} src={isDark ? "/assets/edit-night.png" : "/assets/edit.png"} ></img>
+    return <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  style={{width: "20px"}} viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M2180 2713 c-48 -8 -125 -35 -170 -60 -28 -16 -327 -306 -803 -782 -417 -416 -762 -763 -767 -771 -4 -8 -43 -177 -85 -374 -109 -507 -134 -480 353 -377 185 40 351 77 367 82 21 6 276 255 796 777 709 710 769 772 797 833 88 186 53 400 -87 540 -102 102 -263 155 -401 132z m157 -198 c109 -33 193 -147 193 -265 0 -95 -28 -143 -160 -275 l-120 -120 -198 198 -197 198 126 123 c105 104 133 127 175 139 64 20 118 21 181 2z m-417 -600 l195 -195 -558 -558 -558 -558 -246 -52 c-135 -29 -247 -51 -249 -49 -2 2 19 114 47 248 l52 244 556 558 c306 306 558 557 561 557 3 0 93 -88 200 -195z"/> </g> </svg> 
 }
 
 export default Edit

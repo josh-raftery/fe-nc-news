@@ -3,7 +3,7 @@
 // export default function Hamburger({setClicked}) {
 
 //     function handleClick(){
-//       console.log('test')
+//       ('test')
 //       setClicked(currClicked => !currClicked)
 //     };
 

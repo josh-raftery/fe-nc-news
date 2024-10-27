@@ -14,8 +14,8 @@ function Topics(){
     },[])
 
     return (
-        <div className="topics">
-             <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="topics ">
+             <div className="grid gap-[50px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10">
                 {topics.map((topic) => {
                     return (
                         <Link key={topic.slug} to = {`/?topic=${topic.slug}`}>

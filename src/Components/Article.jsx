@@ -13,6 +13,7 @@ import { UserContext } from "../contexts/User";
 import { ThemeContext } from "../contexts/ThemeContext";
 import NoUserModal from "./NoUserModal";
 import Share from "./Share";
+import Divider from "./Divider";
 
 function Article() {
   const [article, setArticle] = useState({});
@@ -218,81 +219,48 @@ function Article() {
             <div className="flex items-center gap-3 mt-1 border-1">
               <div
                 className={`votes-btn-comment gap-2 h-[40px]`}
-              >
-                {isDark ? (
-                  <button
+              > <button
                     onClick={handleUpvote}
                     className="vote-btn btn btn-ghost btn-sm btn-circle"
                   >
-                    <img
-                      style={{ width: "25px", marginTop: "0.4rem" }}
-                      src={
-                        upvote
-                          ? "/assets/upvote-night.png"
-                          : "/assets/uparrow-night.png"
-                      }
-                    />
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleUpvote}
-                    className="vote-btn btn btn-ghost btn-sm btn-circle"
-                  >
-                    <img
-                      style={{ width: "25px", marginTop: "0.4rem" }}
-                      src={
-                        upvote ? "/assets/upvote.png" : "/assets/up-arrow.png"
-                      }
-                    />
-                  </button>
-                )}
+                    {upvote ? <svg  version="1.0" xmlns="http://www.w3.org/2000/svg"  style={{ width: "25px", marginTop: "0.4rem" }} viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.050000,-0.050000)" fill="currentColor" stroke="none"> <path d="M2823 5856 c-585 -714 -2027 -2536 -2036 -2571 -7 -26 2 -66 21 -95 l33 -50 619 0 620 0 0 -1451 c0 -1570 -3 -1526 109 -1629 l54 -50 757 0 757 0 54 50 c112 103 109 59 109 1629 l0 1451 620 0 619 0 33 50 c54 83 46 94 -1056 1470 -1239 1545 -1118 1435 -1313 1196z m-839 -2451 c-147 -3 -381 -3 -520 0 -140 3 -20 6 266 6 286 0 400 -3 254 -6z m2501 0 c-135 -3 -355 -3 -490 0 -135 4 -24 6 245 6 270 0 380 -2 245 -6z"/> </g> </svg> : <svg version="1.0" style={{ width: "25px", marginTop: "0.4rem" }} xmlns="http://www.w3.org/2000/svg" stroke="currentColor" fill='currentColor' viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)" > <path d="M1411 2928 c-292 -357 -1013 -1268 -1017 -1286 -4 -13 1 -33 10 -47 l16 -25 310 0 310 0 0 -725 c0 -786 -1 -763 55 -815 l27 -25 378 0 378 0 27 25 c56 52 55 29 55 815 l0 725 310 0 310 0 16 25 c9 14 14 34 10 47 -3 13 -245 322 -538 688 -619 773 -559 718 -657 598z m542 -661 l449 -562 -269 -5 c-147 -3 -269 -7 -270 -8 -1 -1 -9 -9 -17 -18 -14 -14 -16 -98 -16 -780 l0 -764 -330 0 -330 0 0 764 c0 682 -2 766 -16 780 -8 9 -16 17 -17 18 -1 1 -123 5 -270 8 l-269 5 449 562 c246 309 450 562 453 562 3 0 207 -253 453 -562z"/> </g> </svg>}
+                    
+                </button>
+                  
                 <p style={{ marginTop: "0.5rem"}}>{votes}</p>
-                {isDark ? (
+                
                   <button
                     onClick={handleDownvote}
                     className="vote-btn btn btn-ghost btn-sm btn-circle"
                   >
-                    <img
-                      style={{ width: "25px", marginTop: "0.4rem" }}
-                      src={
-                        downVote
-                          ? "/assets/downvote-night.png"
-                          : "/assets/down-arrow-night.png"
-                      }
-                    />
+                    {downVote ? <svg  version="1.0" xmlns="http://www.w3.org/2000/svg"  style={{ width: "25px", marginTop: "0.4rem" }} viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.050000,-0.050000)" fill="currentColor"> <path d="M2250 5981 c-55 -23 -123 -100 -149 -167 -14 -38 -21 -528 -21 -1505 l0 -1449 -620 0 -619 0 -33 -50 c-54 -83 -46 -94 1056 -1470 1045 -1304 1067 -1330 1136 -1330 69 0 91 26 1136 1330 1102 1376 1110 1387 1056 1470 l-33 50 -619 0 -620 0 0 1451 c0 1570 3 1526 -109 1629 l-54 50 -734 4 c-403 2 -751 -3 -773 -13z m1016 -256 c-156 -3 -417 -3 -580 0 -163 3 -35 6 284 6 319 0 452 -3 296 -6z"/> </g> </svg>  : <svg style={{marginTop: '0.4rem'}} fill='currentColor' version="1.0" xmlns="http://www.w3.org/2000/svg"  width="25px" viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"> <path d="M1125 2991 c-27 -12 -62 -50 -74 -84 -8 -19 -11 -264 -11 -753 l0 -724 -310 0 -310 0 -16 -25 c-9 -14 -14 -34 -10 -47 3 -13 245 -322 538 -688 522 -652 534 -665 568 -665 34 0 46 13 568 665 293 366 535 675 538 688 4 13 -1 33 -10 47 l-16 25 -310 0 -310 0 0 725 c0 786 1 763 -55 815 l-27 25 -366 2 c-202 1 -376 -2 -387 -6z m705 -885 c0 -682 2 -766 16 -780 8 -9 16 -17 17 -18 1 -1 123 -5 270 -8 l269 -5 -449 -562 c-246 -309 -450 -562 -453 -562 -3 0 -207 253 -453 562 l-449 562 269 5 c147 3 269 7 270 8 1 1 9 9 17 18 14 14 16 98 16 780 l0 764 330 0 330 0 0 -764z"/> </g> </svg> }
+                     
                   </button>
-                ) : (
-                  <button
-                    onClick={handleDownvote}
-                    className="vote-btn btn btn-ghost btn-sm btn-circle"
-                  >
-                    <img
-                      style={{ width: "25px", marginTop: "0.4rem" }}
-                      src={
-                        downVote
-                          ? "/assets/downvote.png"
-                          : "/assets/down-arrow.png"
-                      }
-                    />
-                  </button>
-                )}
+ 
               </div>
               <button onClick={() => setShare(true)} className="btn btn-outline btn-sm h-[40px]">
-                <img
-                  style={{ width: "25px" }}
-                  src={isDark ? "/assets/share-night.png" : "/assets/share.png"}
-                />
+              <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  width="25px"viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M1590 2641 l0 -349 -97 -11 c-206 -25 -370 -75 -558 -167 -416 -204 -736 -584 -864 -1025 -59 -201 -63 -240 -68 -679 -3 -223 -3 -403 0 -400 3 3 51 111 107 240 122 281 166 368 239 471 278 388 695 630 1179 685 l62 7 0 -352 c0 -193 3 -351 6 -351 3 0 137 107 297 239 161 131 472 385 692 565 220 180 401 331 403 335 3 9 -37 42 -850 704 -295 240 -539 437 -542 437 -3 0 -6 -157 -6 -349z m392 -187 c139 -114 666 -543 736 -599 5 -4 -941 -775 -950 -775 -4 0 -8 115 -8 255 l0 255 -74 0 c-179 0 -423 -42 -595 -102 -335 -116 -666 -359 -860 -630 -19 -27 -36 -46 -39 -44 -8 9 39 208 70 295 72 203 181 380 332 538 157 164 322 278 521 358 167 67 313 97 548 111 l97 6 0 250 c0 212 2 249 14 245 8 -3 101 -77 208 -163z"/> </g> </svg> 
                 {windowDimensions.width > 450 && 'Share'}
               </button>
             </div>
           </div>
         </article>
-        <Comments article_id={article.article_id} windowSize={windowDimensions.width} />
+        {windowDimensions.width < 1037 && 
+          <div className=" mr-5 ml-5">
+            <div className="divider"/>
+            <RelatedArticles narrow={true} key="related" topic={article.topic} windowSize={windowDimensions.width}/>
+            <div className="divider remove-margin"/>
+            <TopArticles narrow={true} key="top" windowSize={windowDimensions.width}/>  
+            <div className="divider remove-margin"/>
+          </div>
+        }
+        <Comments comment_count={article.comment_count} article_id={article.article_id} windowSize={windowDimensions.width} />
       </div>
       {windowDimensions.width >= 1037 && 
-      <div>
-        <RelatedArticles key="related" topic={article.topic} windowSize={windowDimensions.width}/>
-        <TopArticles key="top" windowSize={windowDimensions.width}/>
+      <div className="w-[100%]">
+        <RelatedArticles narrow={false} key="related" topic={article.topic} windowSize={windowDimensions.width}/>
+        <div className="divider remove-margin"/>
+        <TopArticles narrow={false} key="top" windowSize={windowDimensions.width}/>
       </div>
       }
     </div>

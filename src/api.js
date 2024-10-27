@@ -5,7 +5,6 @@ const api = axios.create({
 });
 
 function getArticles(params) {
-  // console.log(params,' params')
   return api.get('/articles',{params})
   .then(({ data }) => {
     return data.articles;
@@ -20,8 +19,9 @@ function getArticle(article_id) {
   
 }
 
-function getComments(article_id) {
-  return api.get(`/articles/${article_id}/comments`)
+function getComments(article_id, params) {
+  console.log(params)
+  return api.get(`/articles/${article_id}/comments`,{params})
   .then(({ data }) => {
     return data.comments;
   });

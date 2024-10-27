@@ -40,7 +40,9 @@ function clearAll(){
         }
       }
       if(exact){
-        newCheckbox[key] = ''
+        for(let key in input){
+          newCheckbox[key] = ''
+        }
       }
       return newCheckbox
     })

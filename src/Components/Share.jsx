@@ -31,8 +31,6 @@ export default function Share({setShare}) {
     }
   }
 
-  console.log(hasCopied)
-
   return (
     <>
       <div className="bg-base-100 share-container rounded-xl">

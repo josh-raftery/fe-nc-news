@@ -44,11 +44,12 @@ export default function SignIn() {
                     onChange={handleChange}
                     value={usernameInput}
                     required
+                    onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
                 />
             </label>
-            <div className="card-actions justify-end m-4">
+            <div className="card-actions justify-end mt-4 mb-4">
             <Link to='/signup' >
-                <button style={{marginRight: "2rem"}} className="btn btn-ghost">Create Account</button>
+                <button style={{marginRight: "2rem"}} className="btn btn-ghost no-padding">Create Account</button>
             </Link>
             <button type="submit" className="btn btn-outline">
                 Sign In <Next />
