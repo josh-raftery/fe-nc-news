@@ -64,87 +64,83 @@ function PostArticle() {
   }
 
   return (
-    <section className="post-article-page">
-      <div className="post-article-container ">
-        <form className="post-article">
-          <label className="form-control">
-            <div className="label">
-              <span className="label-text">Title *</span>
-            </div>
-            <textarea
-              onChange={handleChange}
-              name="title"
-              value={formData.title}
-              style={{ height: "30px", width: "500px" }}
-              className={
-                missingTitle
-                  ? "textarea textarea-error"
-                  : "textarea textarea-bordered"
-              }
-              placeholder={missingTitle ? "Enter Title!" : "Type Here..."}
-            ></textarea>
-          </label>
-          <label className="form-control">
-            <div className="label">
-              <span className="label-text">Article Body *</span>
-            </div>
-            <textarea
-              onChange={handleChange}
-              name="body"
-              value={formData.body}
-              style={{ height: "300px", width: "500px" }}
-              className={
-                missingBody
-                  ? "textarea textarea-error"
-                  : "textarea textarea-bordered"
-              }
-              placeholder={missingBody ? "Enter Body!" : "Type Here..."}
-            ></textarea>
-          </label>
-          <label className="form-control">
-            <div className="label">
-              <span className="label-text">Image URL *</span>
-            </div>
-            <textarea
-              onChange={handleChange}
-              name="article_img_url"
-              value={formData.article_img_url}
-              typeof="url"
-              style={{ height: "30px", width: "500px" }}
-              className={
-                missingImg
-                  ? "textarea textarea-error"
-                  : "textarea textarea-bordered"
-              }
-              placeholder={missingImg ? "Enter Image URL!" : "Type Here..."}
-            ></textarea>
-          </label>
-          <div className="flex justify-between items-center w-full">
-            <label className="form-control">
-              <div className="label">
-                <span className="label-text">Select Article Topic *</span>
-              </div>
-              <TopicsDropDown
-                missingTopic={missingTopic}
-                topicsDropDown={topicsDropDown}
-                setTopicsDropDown={setTopicsDropDown}
-                isTopicDropDown={isTopicDropDown}
-                setIsTopicDropDown={setIsTopicDropDown}
-              />
-            </label>
-
-            <button
-              onClick={handleSubmit}
-              style={{ marginTop: "2.3rem" }}
-              className="btn btn-wide btn-outline"
-            >
-              Post Article
-              <Next/>
-            </button>
+    <form className="post-article p-4">
+      <label className="form-control">
+        <div className="label">
+          <span className="label-text">Title *</span>
+        </div>
+        <textarea
+          onChange={handleChange}
+          name="title"
+          value={formData.title}
+          style={{ height: "30px", maxWidth: "500px" }}
+          className={
+            missingTitle
+              ? "textarea textarea-error"
+              : "textarea textarea-bordered"
+          }
+          placeholder={missingTitle ? "Enter Title!" : "Type Here..."}
+        ></textarea>
+      </label>
+      <label className="form-control">
+        <div className="label">
+          <span className="label-text">Article Body *</span>
+        </div>
+        <textarea
+          onChange={handleChange}
+          name="body"
+          value={formData.body}
+          style={{ height: "300px", maxWidth: "500px" }}
+          className={
+            missingBody
+              ? "textarea textarea-error"
+              : "textarea textarea-bordered"
+          }
+          placeholder={missingBody ? "Enter Body!" : "Type Here..."}
+        ></textarea>
+      </label>
+      <label className="form-control">
+        <div className="label">
+          <span className="label-text">Image URL *</span>
+        </div>
+        <textarea
+          onChange={handleChange}
+          name="article_img_url"
+          value={formData.article_img_url}
+          typeof="url"
+          style={{ height: "30px", maxWidth: "500px" }}
+          className={
+            missingImg
+              ? "textarea textarea-error"
+              : "textarea textarea-bordered"
+          }
+          placeholder={missingImg ? "Enter Image URL!" : "Type Here..."}
+        ></textarea>
+      </label>
+      <div className="flex justify-between flex-wrap relative">
+        <label className="">
+          <div className="label">
+            <span className="label-text">Select Article Topic *</span>
           </div>
-        </form>
+          <TopicsDropDown
+            missingTopic={missingTopic}
+            topicsDropDown={topicsDropDown}
+            setTopicsDropDown={setTopicsDropDown}
+            isTopicDropDown={isTopicDropDown}
+            setIsTopicDropDown={setIsTopicDropDown}
+          />
+        </label>
+
+        <button
+          onClick={handleSubmit}
+          style={{}}
+          className="btn btn-wide btn-outline absolute bottom-0 right-0"
+        >
+          Post Article
+          <Next />
+        </button>
       </div>
-    </section>
+    </form>
   );
 }
 
