@@ -19,7 +19,7 @@ function Topics(){
                 {topics.map((topic) => {
                     return (
                         <Link key={topic.slug} to = {`/?topic=${topic.slug}`}>
-                            <div className="card bg-base-100 w-96 shadow-xl">
+                            <div className="card bg-base-100 shadow-xl">
                                 <div className="card-body">
                                     <h2 className="card-title">{topic.slug}</h2>
                                     <p>{topic.description}</p>
