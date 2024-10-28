@@ -54,7 +54,7 @@ function Comments({ article_id, windowSize, comment_count }) {
         setBadComment(false);
         return postComment(article_id, user.username, comment)
           .then((newComment) => {
-            setComments((currComments) => [...newComment, ...currComments]);
+            setComments((currComments) => [newComment, ...currComments]);
             if (!maxPages) {
               setMaxPages(comment_count / limit);
             }
