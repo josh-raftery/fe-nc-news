@@ -175,9 +175,16 @@
     max-width: 700px;
 }
 
+@media (max-width: 485px){
+    .article-preview-div{
+        width: 80vw !important;
+        height: auto !important;
+    }
+}
+
 .home-button{
-    padding-left: 0.3rem !important;
-    padding-right: 0.3rem !important;
+    width: 90px !important;
+    padding: 0 !important;
 }
 
 .search-button{
@@ -260,7 +267,7 @@
 }
 
 .left-side-nav{
-    min-width: 85px;
+    min-width: 135px;
 }
 
 .search-div{
