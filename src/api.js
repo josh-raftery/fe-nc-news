@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://be-nc-news-ml9n.onrender.com/api",
+  baseURL: "https://pulsewire-api.vercel.app/api",
 });
 
 function getArticles(params) {

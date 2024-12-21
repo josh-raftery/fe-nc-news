@@ -10,7 +10,7 @@ This is a mock news app I created using react.js, it displays data utilising the
 
 ## Link to API
 
-**https://be-nc-news-ml9n.onrender.com/api**
+**https://pulsewire-api.vercel.app/api**
 
 ## Link to API repo
 
